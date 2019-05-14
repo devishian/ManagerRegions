@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TaxCodes>
+    <TaxCode>
+      <Key>b865000f-7f77-407b-8f42-d860c651c548</Key>
+      <Timestamp>0</Timestamp>
+      <Name>IVA 16%</Name>
+      <Rate>16</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>82237185-e522-43a2-bdd6-59314a55160f</Key>
+      <Timestamp>0</Timestamp>
+      <Name>IVA 11%</Name>
+      <Rate>11</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+  </TaxCodes>
+</Settings>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TaxCodes>
+    <TaxCode>
+      <Key>f632f0d2-bbf5-42cc-a6b2-f1b181744aba</Key>
+      <Timestamp>0</Timestamp>
+      <Name>MWST 8%</Name>
+      <Rate>8</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>beb8b874-8b09-4b1f-b2ae-a06348f524f6</Key>
+      <Timestamp>0</Timestamp>
+      <Name>MWST 3,8%</Name>
+      <Rate>3.8</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>bf57622c-4e96-4dff-9a76-4ae2da9f0a69</Key>
+      <Timestamp>0</Timestamp>
+      <Name>MWST 2,5%</Name>
+      <Rate>2.5</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+  </TaxCodes>
+</Settings>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TaxCodes>
+    <TaxCode>
+      <Key>cd290a5d-7904-43f3-ad8d-e049ca8a53ab</Key>
+      <Timestamp>0</Timestamp>
+      <Name>ΦΠΑ 13%</Name>
+      <Rate>13</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>73021733-ad27-4abb-993d-f0c739b660cc</Key>
+      <Timestamp>0</Timestamp>
+      <Name>ΦΠΑ 23%</Name>
+      <Rate>23</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>0682dec9-0fa9-4780-9d1d-24cb4066aec3</Key>
+      <Timestamp>0</Timestamp>
+      <Name>ΦΠΑ 24%</Name>
+      <Rate>24</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>0429eb9c-bc44-43fc-8fac-80c62b60b416</Key>
+      <Timestamp>0</Timestamp>
+      <Name>ΦΠΑ 6,5%</Name>
+      <Rate>6.5</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+  </TaxCodes>
+</Settings>

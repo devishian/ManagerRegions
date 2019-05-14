@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TaxCodes>
+    <TaxCode>
+      <Key>705acb55-550e-458a-bf9a-c4c7021dc351</Key>
+      <Timestamp>0</Timestamp>
+      <Name>GST Exempt</Name>
+      <Rate>0</Rate>
+      <TaxRate>ZeroRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>1a88fd08-a595-4e12-97d3-85fc165eecdc</Key>
+      <Timestamp>0</Timestamp>
+      <Name>GST 0%</Name>
+      <Rate>0</Rate>
+      <TaxRate>ZeroRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>ee8cacde-58da-48ec-8aa9-aa6acba9c32f</Key>
+      <Timestamp>0</Timestamp>
+      <Name>GST 15%</Name>
+      <Rate>15</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>d865c9b1-17b9-488b-b29b-b15c0b3c3246</Key>
+      <Timestamp>0</Timestamp>
+      <Name>GST 15% on Imports</Name>
+      <Rate>0</Rate>
+      <TaxRate>TotalRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+  </TaxCodes>
+</Settings>

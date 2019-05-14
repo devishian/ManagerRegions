@@ -1,0 +1,462 @@
+<?xml version="1.0"?>
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CustomFields />
+  <CustomReports>
+    <CustomReportTemplate>
+      <Key>994a34c3-3692-4724-98bd-98b34615b317</Key>
+      <Timestamp>636933864528297001</Timestamp>
+      <Name>GST Calculation Worksheet</Name>
+      <Type xsi:nil="true" />
+      <Template>{% assign gst_10 = taxCodes["8cf9d117-3142-4d9c-82ee-b57a0e22c809"] %}
+{% assign gst_10_capex = taxCodes["3e2cb830-e229-4525-8794-2e38761b3cfd"] %}
+{% assign deferred_gst_10 = taxCodes["73952f89-6139-4fd0-a937-165b8ed66ba8"] %}
+{% assign gst_free = taxCodes["14f63584-be71-40ca-9028-1a60e2e2cc90"] %}
+{% assign gst_free_exports = taxCodes["10d8f9dc-db1e-4c87-9480-a696f59aeddf"] %}
+{% assign gst_on_imports = taxCodes["9fe15ead-2138-4f4b-b3f5-398857d08503"] %}
+{% assign input_taxed = taxCodes["f218a321-f83d-4d06-8d02-b52f595cc4fe"] %}
+
+{% assign g2 = gst_free_exports.totalSales %}
+{% assign g3 = gst_free.totalSales %}
+{% assign g4 = input_taxed.totalSales %}
+{% assign g8 = gst_10.totalSales %}
+{% assign g9 = gst_10.taxOnSales %}
+{% assign g10 = gst_10_capex.totalPurchasesMinusTotalSales %}
+{% assign g11 = gst_10.totalPurchases | plus: gst_free.totalPurchases | plus: input_taxed.totalPurchases %}
+{% assign gst_10_on_imports_multipled_by_11 = gst_on_imports.taxOnPurchasesMinusTaxOnSales | times: 11 %}
+{% assign g11 = g11 | plus: gst_10_on_imports_multipled_by_11 %}
+{% assign g13 = input_taxed.totalPurchases %}
+{% assign g14 = gst_free.totalPurchases %}
+{% assign g20 = gst_10.taxOnPurchases | plus: gst_10_capex.taxOnPurchasesMinusTaxOnSales | plus: gst_on_imports.taxOnPurchasesMinusTaxOnSales %}
+
+{% assign 7a = deferred_gst_10.totalPurchases | divided_by: 10 %}
+{% assign g11 = g11 | plus: deferred_gst_10.totalPurchases | plus: 7a %}
+{% assign g20 = g20 | plus: 7a %}
+
+{% assign g5 = g2 | plus: g3 | plus: g4 %}
+{% assign g1 = g5 | plus: g8 %}
+{% assign g6 = g8 %}
+{% assign g7 = 0 %}
+{% assign g12 = g10 | plus: g11 %}
+{% assign g15 = 0 %}
+{% assign g16 = g13 | plus: g14 | plus: g15 %}
+{% assign g17 = g12 | minus: g16 %}
+{% assign g18 = 0 %}
+{% assign g19 = g17 %}
+
+{% assign 1a = g9 %}
+{% assign 8a = 1a | plus: 7a %}
+{% assign 1b = g20 %}
+{% assign 8b = 1b %}
+{% assign gstPayable = 8a | minus: 8b %}
+
+
+&lt;table style="padding: 30px"&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="7"&gt;{{ business.name }}&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="font-weight: bold; font-size: 24px; text-align: center; padding-bottom: 10px" colspan="7"&gt;GST Calculation Worksheet for BAS&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="7"&gt;{{ period }}&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="7"&gt;{{ accountingBasis }}&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="background-color: #000; color: #fff; font-weight: bold; padding: 5px" colspan="7"&gt;GST amounts you owe the Tax Office from sales&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px; width: 40px"&gt;G1&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Total sales (including any GST)&lt;/td&gt;
+            &lt;td style="padding: 5px; width: 20px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; width: 120px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; width: 10px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right; width: 20px"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px; width: 120px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g1 }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G2&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Export sales&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g2 }}&lt;/div&gt;
+            &lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G3&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Other GST-free sales&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g3 }}&lt;/div&gt;
+            &lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G4&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Input taxed sales&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g4 }}&lt;/div&gt;
+            &lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G5&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;G2 + G3 + G4&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g5 }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G6&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Total sales subject to GST (G1 minus G5)&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g6 }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G7&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Adjustments&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g7 }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G8&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Total sales subject to GST after adjustments (G6 + G7)&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g8 }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G9&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;GST on sales&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g9 }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="background-color: #000; color: #fff; font-weight: bold; padding: 5px" colspan="8"&gt;GST amounts the Tax Office owes you from purchases&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G10&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Capital purchases (including any GST)&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g10 }}&lt;/div&gt;
+            &lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G11&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Non-capital purchases (including any GST)&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g11 }}&lt;/div&gt;
+            &lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G12&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;G10 + G11&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g12 }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G13&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Purchases for making input taxed sales&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g13 }}&lt;/div&gt;
+            &lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G14&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Purchases without GST in the price&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g14 }}&lt;/div&gt;
+            &lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G15&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Purchases for private use or not income tax deductible&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g15 }}&lt;/div&gt;
+            &lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G16&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;G13 + G14 + G15&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g16 }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G17&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Total purchases subject to GST (G12 minus G16)&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g17 }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G18&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Adjustments&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g18 }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G19&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Total purchases subject to GST after adjustments (G17 + G18)&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g19 }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;G20&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;GST on purchases&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ g20 }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="background-color: #000; color: #fff; font-weight: bold; padding: 5px" colspan="7"&gt;Summary&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;1A&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;GST on sales&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ 1a }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        {% if 7A != 0 %}
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;7A&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Deferred GST&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ 7a }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;8A&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;Total amount you owe the ATO (1A + 7A)&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ 8a }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        {% endif %}
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;1B&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;GST on purchases&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{{ 1b }}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 5px"&gt;9&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;{% if gstPayable &gt; 0 %}Your payment{% else %}Your refund{% endif %}&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;&lt;/td&gt;
+            &lt;td style="padding: 5px; text-align: right"&gt;$&lt;/td&gt;
+            &lt;td style="padding: 5px"&gt;
+                &lt;div style="padding: 3px; border-style: solid; border-width: 1px; border-color: #000; text-align: right; font-weight: bold"&gt;{% if gstPayable &gt; 0 %}{{ gstPayable }}{% else %}{{ gstPayable | times: -1 }}{% endif %}&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</Template>
+    </CustomReportTemplate>
+  </CustomReports>
+  <TaxCode>
+    <TaxCode>
+      <Key>10d8f9dc-db1e-4c87-9480-a696f59aeddf</Key>
+      <Timestamp>636933786473290413</Timestamp>
+      <Name>GST Free Exports</Name>
+      <Rate>0</Rate>
+      <TaxRate>ZeroRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>14f63584-be71-40ca-9028-1a60e2e2cc90</Key>
+      <Timestamp>636933786473290413</Timestamp>
+      <Name>GST Free</Name>
+      <Rate>0</Rate>
+      <TaxRate>ZeroRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>3e2cb830-e229-4525-8794-2e38761b3cfd</Key>
+      <Timestamp>636933786473290413</Timestamp>
+      <Name>GST 10% (CAPEX)</Name>
+      <Rate>10</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>73952f89-6139-4fd0-a937-165b8ed66ba8</Key>
+      <Timestamp>636933786473290413</Timestamp>
+      <Name>GST 10% (Deferred)</Name>
+      <Rate>0</Rate>
+      <TaxRate>ZeroRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>8cf9d117-3142-4d9c-82ee-b57a0e22c809</Key>
+      <Timestamp>636933786473290413</Timestamp>
+      <Name>GST 10%</Name>
+      <Rate>10</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>9fe15ead-2138-4f4b-b3f5-398857d08503</Key>
+      <Timestamp>636933786473290413</Timestamp>
+      <Name>GST on Imports</Name>
+      <Rate>0</Rate>
+      <TaxRate>TotalRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>f218a321-f83d-4d06-8d02-b52f595cc4fe</Key>
+      <Timestamp>636933786473290413</Timestamp>
+      <Name>Input Taxed</Name>
+      <Rate>0</Rate>
+      <TaxRate>ZeroRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+  </TaxCode>
+  <PayslipEarningsItems />
+  <PayslipDeductionItems />
+  <PayslipContributionItems />
+  <BalanceSheetAccounts />
+  <BalanceSheetGroups />
+</Settings>
