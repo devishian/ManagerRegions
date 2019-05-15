@@ -1,65 +1,158 @@
 <?xml version="1.0"?>
-<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CustomFields />
+  <CustomReports>
+    <CustomReportTemplate>
+      <Key>153a8219-2b74-4e48-87fa-7fbd23d50534</Key>
+      <Timestamp>636935595208137253</Timestamp>
+      <Name>VAT Calculation Worksheet</Name>
+      <Type xsi:nil="true" />
+      <Template>{% assign VAT_0 = taxCodes["6959fb01-3a48-486a-9bec-a0681a662f03"] %}
+{% assign VAT_0_EU = taxCodes["70364d69-174a-4804-881e-852bdbff59e2"] %}
+{% assign VAT_20 = taxCodes["b926c2d8-09e4-496c-9a2c-818c8aaa36ed"] %}
+{% assign VAT_20_on_imports = taxCodes["11e650b0-ec87-4e45-9049-10a83ea4bed6"] %}
+{% assign VAT_5 = taxCodes["56769971-405e-47bd-bd13-d64de0eae752"] %}
+{% assign VAT_5_on_imports = taxCodes["4ca35740-f9b7-4dc6-bc88-08bdc8715994"] %}
+{% assign VAT_exempt = taxCodes["42a5002c-5c8f-4def-8672-4e6f3fc09654"] %}
+
+{% assign G1 = VAT_5.taxOnSales | plus: VAT_20.taxOnSales %}
+{% assign G2 = 0 %}
+{% assign G3 = G1 | plus: G2 %}
+{% assign G4 = VAT_5.taxOnPurchases | plus: VAT_20.taxOnPurchases | plus: VAT_5_on_imports.taxOnPurchasesMinusTaxOnSales | plus: VAT_20_on_imports.taxOnPurchasesMinusTaxOnSales %}
+{% assign G5 = G3 | minus: G4 %}
+{% assign G6 = VAT_0.netSales | plus: VAT_0_EU.netSales | plus: VAT_5.netSales | plus: VAT_20.netSales | plus: VAT_exempt.netSales %}
+{% assign G7_VAT_5_on_imports = VAT_5_on_imports.taxOnPurchasesMinusTaxOnSales | times: 20 %}
+{% assign G7_VAT_20_on_imports = VAT_20_on_imports.taxOnPurchasesMinusTaxOnSales | times: 5 %}
+{% assign G7 = VAT_0.netPurchases | plus: VAT_0_EU.netPurchases | plus: VAT_5.netPurchases | plus: VAT_20.netPurchases | plus: VAT_exempt.netPurchases | plus: G7_VAT_5_on_imports | plus: G7_VAT_20_on_imports %}
+{% assign G8 = VAT_0_EU.netSales %}
+{% assign G9 = VAT_0_EU.netPurchases %}
+
+&lt;table style="padding: 30px"&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="4"&gt;{{ business.name }}&lt;/th&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th style="font-weight: bold; font-size: 24px; text-align: center; padding-bottom: 10px" colspan="4"&gt;VAT Calculation Worksheet&lt;/th&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="4"&gt;{{ period }}&lt;/th&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="4"&gt;{{ accountingBasis }}&lt;/th&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th style="background-color: #000; color: #fff; padding: 5px" colspan="4"&gt;
+				&lt;b&gt;VAT Calculations&lt;/b&gt;
+			&lt;/th&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td style="padding: 5px"&gt;VAT due in this period on sales and other outputs&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 120px"&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G1 }}&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 150px"&gt;
+				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#1 on the VAT Return&lt;/div&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td style="padding: 5px"&gt;VAT due in this period on acquisitions from other EC Member States&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 120px"&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G2 }}&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 150px"&gt;
+				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#2 on the VAT Return&lt;/div&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td style="padding: 5px"&gt;
+				&lt;b&gt;Total VAT due (the sum of boxes 1 and 2)&lt;/b&gt;
+			&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 120px"&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G3 }}&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 150px"&gt;
+				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#3 on the VAT Return&lt;/div&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td style="padding: 5px"&gt;VAT reclaimed in this period on purchases and other inputs (including acquisitions from the EC)&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 120px"&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G4 }}&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 150px"&gt;
+				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#4 on the VAT Return&lt;/div&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td style="padding: 5px"&gt;
+				&lt;b&gt;Net VAT to be paid to Customs or reclaimed by you (Difference between boxes 3 and 4)&lt;/b&gt;
+			&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 120px"&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G5 }}&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 150px"&gt;
+				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#5 on the VAT Return&lt;/div&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th style="background-color: #000; color: #fff; padding: 5px" colspan="4"&gt;
+				&lt;b&gt;Sales and Purchases Excluding VAT&lt;/b&gt;
+			&lt;/th&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td style="padding: 5px"&gt;Total value of sales and all other outputs excluding any VAT. Include your box 8 figure.&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 120px"&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G6 }}&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 150px"&gt;
+				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#6 on the VAT Return&lt;/div&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td style="padding: 5px"&gt;Total value of purchases and all other inputs excluding any VAT. Include your box 9 figure.&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 120px"&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G7 }}&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 150px"&gt;
+				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#7 on the VAT Return&lt;/div&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td style="padding: 5px"&gt;Total value of all supplies of goods and related costs, excluding any VAT, to other EC Member States.&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 120px"&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G8 }}&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 150px"&gt;
+				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#8 on the VAT Return&lt;/div&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td style="padding: 5px"&gt;Total value of acquisitions of goods and related costs, excluding any VAT, from other EC Member States.&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 120px"&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G9 }}&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 150px"&gt;
+				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#9 on the VAT Return&lt;/div&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;</Template>
+    </CustomReportTemplate>
+  </CustomReports>
   <TaxCodes>
     <TaxCode>
-      <Key>6959fb01-3a48-486a-9bec-a0681a662f03</Key>
-      <Timestamp>0</Timestamp>
-      <Name>VAT 0%</Name>
-      <Rate>0</Rate>
-      <TaxRate>ZeroRate</TaxRate>
-      <TaxRateType>SingleRate</TaxRateType>
-      <Account xsi:nil="true" />
-      <HasFlatRate>false</HasFlatRate>
-      <FlatRate xsi:nil="true" />
-      <Archived>false</Archived>
-      <IsReverseCharged>false</IsReverseCharged>
-      <ReverseChargedRate>0</ReverseChargedRate>
-    </TaxCode>
-    <TaxCode>
-      <Key>56769971-405e-47bd-bd13-d64de0eae752</Key>
-      <Timestamp>0</Timestamp>
-      <Name>VAT 5%</Name>
-      <Rate>5</Rate>
-      <TaxRate>CustomRate</TaxRate>
-      <TaxRateType>SingleRate</TaxRateType>
-      <Account xsi:nil="true" />
-      <HasFlatRate>false</HasFlatRate>
-      <FlatRate xsi:nil="true" />
-      <Archived>false</Archived>
-      <IsReverseCharged>false</IsReverseCharged>
-      <ReverseChargedRate>0</ReverseChargedRate>
-    </TaxCode>
-    <TaxCode>
-      <Key>4ca35740-f9b7-4dc6-bc88-08bdc8715994</Key>
-      <Timestamp>0</Timestamp>
-      <Name>VAT 5% on Imports</Name>
-      <Rate>0</Rate>
-      <TaxRate>TotalRate</TaxRate>
-      <TaxRateType>SingleRate</TaxRateType>
-      <Account xsi:nil="true" />
-      <HasFlatRate>false</HasFlatRate>
-      <FlatRate xsi:nil="true" />
-      <Archived>false</Archived>
-      <IsReverseCharged>false</IsReverseCharged>
-      <ReverseChargedRate>0</ReverseChargedRate>
-    </TaxCode>
-    <TaxCode>
-      <Key>b926c2d8-09e4-496c-9a2c-818c8aaa36ed</Key>
-      <Timestamp>0</Timestamp>
-      <Name>VAT 20%</Name>
-      <Rate>20</Rate>
-      <TaxRate>CustomRate</TaxRate>
-      <TaxRateType>SingleRate</TaxRateType>
-      <Account xsi:nil="true" />
-      <HasFlatRate>false</HasFlatRate>
-      <FlatRate xsi:nil="true" />
-      <Archived>false</Archived>
-      <IsReverseCharged>false</IsReverseCharged>
-      <ReverseChargedRate>0</ReverseChargedRate>
-    </TaxCode>
-    <TaxCode>
       <Key>11e650b0-ec87-4e45-9049-10a83ea4bed6</Key>
-      <Timestamp>0</Timestamp>
+      <Timestamp>636935583553210510</Timestamp>
       <Name>VAT 20% on Imports</Name>
       <Rate>0</Rate>
       <TaxRate>TotalRate</TaxRate>
@@ -73,7 +166,7 @@
     </TaxCode>
     <TaxCode>
       <Key>42a5002c-5c8f-4def-8672-4e6f3fc09654</Key>
-      <Timestamp>0</Timestamp>
+      <Timestamp>636935583553210510</Timestamp>
       <Name>VAT Exempt</Name>
       <Rate>0</Rate>
       <TaxRate>ZeroRate</TaxRate>
@@ -86,8 +179,50 @@
       <ReverseChargedRate>0</ReverseChargedRate>
     </TaxCode>
     <TaxCode>
+      <Key>4ca35740-f9b7-4dc6-bc88-08bdc8715994</Key>
+      <Timestamp>636935583553210510</Timestamp>
+      <Name>VAT 5% on Imports</Name>
+      <Rate>0</Rate>
+      <TaxRate>TotalRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>56769971-405e-47bd-bd13-d64de0eae752</Key>
+      <Timestamp>636935583553210510</Timestamp>
+      <Name>VAT 5%</Name>
+      <Rate>5</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
+      <Key>6959fb01-3a48-486a-9bec-a0681a662f03</Key>
+      <Timestamp>636935583553210510</Timestamp>
+      <Name>VAT 0%</Name>
+      <Rate>0</Rate>
+      <TaxRate>ZeroRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
+    <TaxCode>
       <Key>70364d69-174a-4804-881e-852bdbff59e2</Key>
-      <Timestamp>0</Timestamp>
+      <Timestamp>636935583553210510</Timestamp>
       <Name>VAT 0% (EU)</Name>
       <Rate>0</Rate>
       <TaxRate>ZeroRate</TaxRate>
@@ -99,5 +234,24 @@
       <IsReverseCharged>false</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
     </TaxCode>
+    <TaxCode>
+      <Key>b926c2d8-09e4-496c-9a2c-818c8aaa36ed</Key>
+      <Timestamp>636935583553210510</Timestamp>
+      <Name>VAT 20%</Name>
+      <Rate>20</Rate>
+      <TaxRate>CustomRate</TaxRate>
+      <TaxRateType>SingleRate</TaxRateType>
+      <Account xsi:nil="true" />
+      <HasFlatRate>false</HasFlatRate>
+      <FlatRate xsi:nil="true" />
+      <Archived>false</Archived>
+      <IsReverseCharged>false</IsReverseCharged>
+      <ReverseChargedRate>0</ReverseChargedRate>
+    </TaxCode>
   </TaxCodes>
+  <PayslipEarningsItems />
+  <PayslipDeductionItems />
+  <PayslipContributionItems />
+  <BalanceSheetAccounts />
+  <BalanceSheetGroups />
 </Settings>
