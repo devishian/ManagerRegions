@@ -354,7 +354,7 @@
 &lt;/table&gt;</Template>
     </CustomReportTemplate>
   </CustomReports>
-  <TaxCode>
+  <TaxCodes>
     <TaxCode>
       <Key>10d8f9dc-db1e-4c87-9480-a696f59aeddf</Key>
       <Timestamp>636933786473290413</Timestamp>
@@ -453,7 +453,7 @@
       <IsReverseCharged>false</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
     </TaxCode>
-  </TaxCode>
+  </TaxCodes>
   <PayslipEarningsItems />
   <PayslipDeductionItems />
   <PayslipContributionItems />
