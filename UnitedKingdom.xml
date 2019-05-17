@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <CustomFields />
-  <CustomReports>
-    <CustomReportTemplate>
+  <RegionalReports>
+    <RegionalReport>
       <Key>12e5e9fb-d8e8-4fce-aa33-8ba564117550</Key>
       <Timestamp>636935595208137253</Timestamp>
       <Name>VAT Calculation Worksheet</Name>
@@ -50,7 +50,7 @@
 			&lt;td style="padding: 5px"&gt;VAT due in this period on sales and other outputs&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
-				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G1 }}&lt;/div&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G1 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 150px"&gt;
 				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#1 on the VAT Return&lt;/div&gt;
@@ -60,7 +60,7 @@
 			&lt;td style="padding: 5px"&gt;VAT due in this period on acquisitions from other EC Member States&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
-				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G2 }}&lt;/div&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G2 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 150px"&gt;
 				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#2 on the VAT Return&lt;/div&gt;
@@ -72,7 +72,7 @@
 			&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
-				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G3 }}&lt;/div&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G3 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 150px"&gt;
 				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#3 on the VAT Return&lt;/div&gt;
@@ -82,7 +82,7 @@
 			&lt;td style="padding: 5px"&gt;VAT reclaimed in this period on purchases and other inputs (including acquisitions from the EC)&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
-				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G4 }}&lt;/div&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G4 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 150px"&gt;
 				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#4 on the VAT Return&lt;/div&gt;
@@ -94,7 +94,7 @@
 			&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
-				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G5 }}&lt;/div&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G5 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 150px"&gt;
 				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#5 on the VAT Return&lt;/div&gt;
@@ -109,7 +109,7 @@
 			&lt;td style="padding: 5px"&gt;Total value of sales and all other outputs excluding any VAT. Include your box 8 figure.&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
-				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G6 }}&lt;/div&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G6 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 150px"&gt;
 				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#6 on the VAT Return&lt;/div&gt;
@@ -119,7 +119,7 @@
 			&lt;td style="padding: 5px"&gt;Total value of purchases and all other inputs excluding any VAT. Include your box 9 figure.&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
-				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G7 }}&lt;/div&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G7 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 150px"&gt;
 				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#7 on the VAT Return&lt;/div&gt;
@@ -129,7 +129,7 @@
 			&lt;td style="padding: 5px"&gt;Total value of all supplies of goods and related costs, excluding any VAT, to other EC Member States.&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
-				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G8 }}&lt;/div&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G8 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 150px"&gt;
 				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#8 on the VAT Return&lt;/div&gt;
@@ -139,7 +139,7 @@
 			&lt;td style="padding: 5px"&gt;Total value of acquisitions of goods and related costs, excluding any VAT, from other EC Member States.&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
-				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G9 }}&lt;/div&gt;
+				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G9 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 150px"&gt;
 				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#9 on the VAT Return&lt;/div&gt;
@@ -147,8 +147,8 @@
 		&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;</Template>
-    </CustomReportTemplate>
-  </CustomReports>
+    </RegionalReport>
+  </RegionalReports>
   <TaxCodes>
     <TaxCode>
       <Key>11e650b0-ec87-4e45-9049-10a83ea4bed6</Key>

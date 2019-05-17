@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <CustomFields />
-  <CustomReports>
-    <CustomReportTemplate>
+  <RegionalReports>
+    <RegionalReport>
       <Key>b755a3ef-32aa-4eab-8936-0e48b057f627</Key>
       <Timestamp>636935580146350275</Timestamp>
       <Name>Concept BTW Aangifte</Name>
@@ -84,16 +84,16 @@
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;1a Leveringen/diensten belast met hoog tarief&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 1a_grondslag }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 1a_grondslag | format: 'n' }}&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 1a_omzetbelasting }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 1a_omzetbelasting | format: 'n' }}&lt;/td&gt;
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;1b Leveringen/diensten belast met laag tarief&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 1b_grondslag }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 1b_grondslag | format: 'n' }}&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 1b_omzetbelasting }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 1b_omzetbelasting | format: 'n' }}&lt;/td&gt;
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;1c Leveringen/diensten belast met overige tarieven, behalve 0%&lt;/td&gt;
@@ -107,12 +107,12 @@
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 1d_omzetbelasting }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 1d_omzetbelasting | format: 'n' }}&lt;/td&gt;
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;1e Leveringen/diensten belast met 0% of niet bij u belast&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 1e_grondslag }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 1e_grondslag | format: 'n' }}&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;&lt;/td&gt;
 		&lt;/tr&gt;
@@ -124,9 +124,9 @@
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;2a Leveringen/diensten waarbij de heffing van omzetbelasting naar u is verlegd&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 2a_grondslag }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 2a_grondslag | format: 'n' }}&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 2a_omzetbelasting }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 2a_omzetbelasting | format: 'n' }}&lt;/td&gt;
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;th style="background-color: #000; color: #fff; padding: 5px" colspan="5"&gt;
@@ -136,14 +136,14 @@
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;3a Leveringen naar landen buiten de EU (uitvoer)&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 3a_grondslag }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 3a_grondslag | format: 'n' }}&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;&lt;/td&gt;
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;3b Leveringen naar of diensten in landen binnen de EU&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 3b_grondslag }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 3b_grondslag | format: 'n' }}&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;&lt;/td&gt;
 		&lt;/tr&gt;
@@ -162,16 +162,16 @@
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;4a Leveringen/diensten uit landen buiten de EU&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 4a_grondslag }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 4a_grondslag | format: 'n' }}&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 4a_omzetbelasting }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 4a_omzetbelasting | format: 'n' }}&lt;/td&gt;
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;4b Leveringen/diensten uit landen binnen de EU&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 4b_grondslag }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 4b_grondslag | format: 'n' }}&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 4b_omzetbelasting }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 4b_omzetbelasting | format: 'n' }}&lt;/td&gt;
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;th style="background-color: #000; color: #fff; padding: 5px" colspan="5"&gt;
@@ -181,17 +181,17 @@
 		&lt;tr&gt;
 			&lt;td style="padding: 5px" colspan="3"&gt;5a Omzetbelasting (rubrieken 1 t/m 4&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 5a_omzetbelasting }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 5a_omzetbelasting | format: 'n' }}&lt;/td&gt;
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px" colspan="3"&gt;5b Voorbelasting&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 5b_omzetbelasting }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 5b_omzetbelasting | format: 'n' }}&lt;/td&gt;
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px" colspan="3"&gt;5c Subtotaal (rubriek 5a min 5b)&lt;/td&gt;
 			&lt;td style="padding: 5px; text-align: left; width: 20px"&gt;€&lt;/td&gt;
-			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 5c_omzetbelasting }}&lt;/td&gt;
+			&lt;td style="padding: 5px; text-align: right; font-weight: bold; width: 120px"&gt;{{ 5c_omzetbelasting | format: 'n' }}&lt;/td&gt;
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px" colspan="3"&gt;5d Vermindering volgens de kleineondernemersregeling&lt;/td&gt;
@@ -215,8 +215,8 @@
 		&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;</Template>
-    </CustomReportTemplate>
-  </CustomReports>
+    </RegionalReport>
+  </RegionalReports>
   <TaxCodes>
     <TaxCode>
       <Key>1f681bc9-93fd-4e09-815f-2f1c6bc5044b</Key>
