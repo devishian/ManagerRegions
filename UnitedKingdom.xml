@@ -48,7 +48,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;VAT due in this period on sales and other outputs&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G1 }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -58,7 +58,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;VAT due in this period on acquisitions from other EC Member States&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G2 }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -70,7 +70,7 @@
 			&lt;td style="padding: 5px"&gt;
 				&lt;b&gt;Total VAT due (the sum of boxes 1 and 2)&lt;/b&gt;
 			&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G3 }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -80,7 +80,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;VAT reclaimed in this period on purchases and other inputs (including acquisitions from the EC)&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G4 }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -92,7 +92,7 @@
 			&lt;td style="padding: 5px"&gt;
 				&lt;b&gt;Net VAT to be paid to Customs or reclaimed by you (Difference between boxes 3 and 4)&lt;/b&gt;
 			&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G5 }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -107,7 +107,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;Total value of sales and all other outputs excluding any VAT. Include your box 8 figure.&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G6 }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -117,7 +117,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;Total value of purchases and all other inputs excluding any VAT. Include your box 9 figure.&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G7 }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -127,7 +127,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;Total value of all supplies of goods and related costs, excluding any VAT, to other EC Member States.&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G8 }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -137,7 +137,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;Total value of acquisitions of goods and related costs, excluding any VAT, from other EC Member States.&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G9 }}&lt;/div&gt;
 			&lt;/td&gt;
