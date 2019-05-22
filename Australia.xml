@@ -50,20 +50,6 @@ Lump sum E</DropdownValues>
       <Timestamp>636937431984669440</Timestamp>
     </CustomField>
     <CustomField>
-      <Name>Date of birth (if known)</Name>
-      <Type>dadb7f95-a5dd-45c0-945d-6ad4ee28776e</Type>
-      <FieldType>Date</FieldType>
-      <FieldSize>Small</FieldSize>
-      <Position />
-      <DisplayOnList>False</DisplayOnList>
-      <DisplayOnView>False</DisplayOnView>
-      <DropdownValues />
-      <Inactive>False</Inactive>
-      <Obsolete_DefaultValue />
-      <Key>b3106182-f027-47dd-b2b0-2f7273aa50d5</Key>
-      <Timestamp>636937476422937576</Timestamp>
-    </CustomField>
-    <CustomField>
       <Name>ATO reporting category</Name>
       <Type>0444eb18-6fc5-4d1f-be8b-c114da01832c</Type>
       <FieldType>DropdownList</FieldType>
