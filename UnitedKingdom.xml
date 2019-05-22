@@ -1,28 +1,28 @@
 <Settings>
-  <CustomFields />
+  <CustomFields/>
   <RegionalReports>
     <ReportTransformation>
       <Name>VAT Calculation Worksheet</Name>
       <Type>68e0d57b-4a59-453e-b8d4-6166f097eacd</Type>
-      <Template>{% assign VAT_0 = rows["6959fb01-3a48-486a-9bec-a0681a662f03"] %}
-{% assign VAT_0_EU = rows["70364d69-174a-4804-881e-852bdbff59e2"] %}
-{% assign VAT_20 = rows["b926c2d8-09e4-496c-9a2c-818c8aaa36ed"] %}
-{% assign VAT_20_on_imports = rows["11e650b0-ec87-4e45-9049-10a83ea4bed6"] %}
-{% assign VAT_5 = rows["56769971-405e-47bd-bd13-d64de0eae752"] %}
-{% assign VAT_5_on_imports = rows["4ca35740-f9b7-4dc6-bc88-08bdc8715994"] %}
-{% assign VAT_exempt = rows["42a5002c-5c8f-4def-8672-4e6f3fc09654"] %}
+      <Template>{% assign VAT_0 = "6959fb01-3a48-486a-9bec-a0681a662f03" %}
+{% assign VAT_0_EU = "70364d69-174a-4804-881e-852bdbff59e2" %}
+{% assign VAT_20 = "b926c2d8-09e4-496c-9a2c-818c8aaa36ed" %}
+{% assign VAT_20_on_imports = "11e650b0-ec87-4e45-9049-10a83ea4bed6" %}
+{% assign VAT_5 = "56769971-405e-47bd-bd13-d64de0eae752" %}
+{% assign VAT_5_on_imports = "4ca35740-f9b7-4dc6-bc88-08bdc8715994" %}
+{% assign VAT_exempt = "42a5002c-5c8f-4def-8672-4e6f3fc09654" %}
 
-{% assign G1 = VAT_5.taxOnSales | plus: VAT_20.taxOnSales %}
+{% assign G1 = taxOnSales[VAT_5] | plus: taxOnSales[VAT_20] %}
 {% assign G2 = 0 %}
 {% assign G3 = G1 | plus: G2 %}
-{% assign G4 = VAT_5.taxOnPurchases | plus: VAT_20.taxOnPurchases | plus: VAT_5_on_imports.taxOnPurchasesMinusTaxOnSales | plus: VAT_20_on_imports.taxOnPurchasesMinusTaxOnSales %}
+{% assign G4 = taxOnPurchases[VAT_5] | plus: taxOnPurchases[VAT_20] | plus: taxOnPurchasesMinusTaxOnSales[VAT_5_on_imports] | plus: taxOnPurchasesMinusTaxOnSales[VAT_20_on_imports] %}
 {% assign G5 = G3 | minus: G4 %}
-{% assign G6 = VAT_0.netSales | plus: VAT_0_EU.netSales | plus: VAT_5.netSales | plus: VAT_20.netSales | plus: VAT_exempt.netSales %}
-{% assign G7_VAT_5_on_imports = VAT_5_on_imports.taxOnPurchasesMinusTaxOnSales | times: 20 %}
-{% assign G7_VAT_20_on_imports = VAT_20_on_imports.taxOnPurchasesMinusTaxOnSales | times: 5 %}
-{% assign G7 = VAT_0.netPurchases | plus: VAT_0_EU.netPurchases | plus: VAT_5.netPurchases | plus: VAT_20.netPurchases | plus: VAT_exempt.netPurchases | plus: G7_VAT_5_on_imports | plus: G7_VAT_20_on_imports %}
-{% assign G8 = VAT_0_EU.netSales %}
-{% assign G9 = VAT_0_EU.netPurchases %}
+{% assign G6 = netSales[VAT_0] | plus: netSales[VAT_0_EU] | plus: netSales[VAT_5] | plus: netSales[VAT_20] | plus: netSales[VAT_exempt] %}
+{% assign G7_VAT_5_on_imports = taxOnPurchasesMinusTaxOnSales[VAT_5_on_imports] | times: 20 %}
+{% assign G7_VAT_20_on_imports = taxOnPurchasesMinusTaxOnSales[VAT_20_on_imports] | times: 5 %}
+{% assign G7 = netPurchases[VAT_0] | plus: netPurchases[VAT_0_EU] | plus: netPurchases[VAT_5] | plus: netPurchases[VAT_20] | plus: netPurchases[VAT_exempt] | plus: G7_VAT_5_on_imports | plus: G7_VAT_20_on_imports %}
+{% assign G8 = netSales[VAT_0_EU] %}
+{% assign G9 = netPurchases[VAT_0_EU] %}
 
 &lt;table style="padding: 30px"&gt;
 	&lt;tbody&gt;
@@ -48,7 +48,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;VAT due in this period on sales and other outputs&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G1 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -58,7 +58,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;VAT due in this period on acquisitions from other EC Member States&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G2 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -70,7 +70,7 @@
 			&lt;td style="padding: 5px"&gt;
 				&lt;b&gt;Total VAT due (the sum of boxes 1 and 2)&lt;/b&gt;
 			&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G3 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -80,7 +80,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;VAT reclaimed in this period on purchases and other inputs (including acquisitions from the EC)&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G4 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -92,7 +92,7 @@
 			&lt;td style="padding: 5px"&gt;
 				&lt;b&gt;Net VAT to be paid to Customs or reclaimed by you (Difference between boxes 3 and 4)&lt;/b&gt;
 			&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G5 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -107,7 +107,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;Total value of sales and all other outputs excluding any VAT. Include your box 8 figure.&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G6 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -117,7 +117,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;Total value of purchases and all other inputs excluding any VAT. Include your box 9 figure.&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G7 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -127,7 +127,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;Total value of all supplies of goods and related costs, excluding any VAT, to other EC Member States.&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G8 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -137,7 +137,7 @@
 		&lt;/tr&gt;
 		&lt;tr&gt;
 			&lt;td style="padding: 5px"&gt;Total value of acquisitions of goods and related costs, excluding any VAT, from other EC Member States.&lt;/td&gt;
-			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;Â£&lt;/td&gt;
+			&lt;td style="padding: 5px; width: 20px; text-align: right"&gt;£&lt;/td&gt;
 			&lt;td style="padding: 5px; width: 120px"&gt;
 				&lt;div style="padding: 3px; border: 1px solid #000; text-align: right; font-weight: bold"&gt;{{ G9 | format: 'n' }}&lt;/div&gt;
 			&lt;/td&gt;
@@ -148,20 +148,20 @@
 	&lt;/tbody&gt;
 &lt;/table&gt;</Template>
       <Key>12e5e9fb-d8e8-4fce-aa33-8ba564117550</Key>
-      <Timestamp>636940045721747035</Timestamp>
+      <Timestamp>636940994295579848</Timestamp>
     </ReportTransformation>
   </RegionalReports>
   <TaxCodes>
     <TaxCode>
       <Name>VAT 20% on Imports</Name>
-      <Components />
-      <Notes />
+      <Components/>
+      <Notes/>
       <Rate>0</Rate>
       <TaxRate>TotalRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account />
+      <Account/>
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate />
+      <FlatRate/>
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
@@ -170,14 +170,14 @@
     </TaxCode>
     <TaxCode>
       <Name>VAT Exempt</Name>
-      <Components />
-      <Notes />
+      <Components/>
+      <Notes/>
       <Rate>0</Rate>
       <TaxRate>ZeroRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account />
+      <Account/>
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate />
+      <FlatRate/>
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
@@ -186,14 +186,14 @@
     </TaxCode>
     <TaxCode>
       <Name>VAT 5% on Imports</Name>
-      <Components />
-      <Notes />
+      <Components/>
+      <Notes/>
       <Rate>0</Rate>
       <TaxRate>TotalRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account />
+      <Account/>
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate />
+      <FlatRate/>
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
@@ -202,14 +202,14 @@
     </TaxCode>
     <TaxCode>
       <Name>VAT 5%</Name>
-      <Components />
-      <Notes />
+      <Components/>
+      <Notes/>
       <Rate>5</Rate>
       <TaxRate>CustomRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account />
+      <Account/>
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate />
+      <FlatRate/>
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
@@ -218,14 +218,14 @@
     </TaxCode>
     <TaxCode>
       <Name>VAT 0%</Name>
-      <Components />
-      <Notes />
+      <Components/>
+      <Notes/>
       <Rate>0</Rate>
       <TaxRate>ZeroRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account />
+      <Account/>
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate />
+      <FlatRate/>
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
@@ -234,14 +234,14 @@
     </TaxCode>
     <TaxCode>
       <Name>VAT 0% (EU)</Name>
-      <Components />
-      <Notes />
+      <Components/>
+      <Notes/>
       <Rate>0</Rate>
       <TaxRate>ZeroRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account />
+      <Account/>
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate />
+      <FlatRate/>
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
@@ -250,14 +250,14 @@
     </TaxCode>
     <TaxCode>
       <Name>VAT 20%</Name>
-      <Components />
-      <Notes />
+      <Components/>
+      <Notes/>
       <Rate>20</Rate>
       <TaxRate>CustomRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account />
+      <Account/>
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate />
+      <FlatRate/>
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
@@ -265,9 +265,9 @@
       <Timestamp>636937309167055835</Timestamp>
     </TaxCode>
   </TaxCodes>
-  <PayslipEarningsItems />
-  <PayslipDeductionItems />
-  <PayslipContributionItems />
-  <BalanceSheetAccounts />
-  <BalanceSheetGroups />
+  <PayslipEarningsItems/>
+  <PayslipDeductionItems/>
+  <PayslipContributionItems/>
+  <BalanceSheetAccounts/>
+  <BalanceSheetGroups/>
 </Settings>

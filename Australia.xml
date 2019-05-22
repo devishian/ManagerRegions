@@ -70,29 +70,29 @@ Union / association fees</DropdownValues>
     <ReportTransformation>
       <Name>GST Calculation Worksheet</Name>
       <Type>68e0d57b-4a59-453e-b8d4-6166f097eacd</Type>
-      <Template>{% assign gst_10 = rows["8cf9d117-3142-4d9c-82ee-b57a0e22c809"] %}
-{% assign gst_10_capex = rows["3e2cb830-e229-4525-8794-2e38761b3cfd"] %}
-{% assign deferred_gst_10 = rows["73952f89-6139-4fd0-a937-165b8ed66ba8"] %}
-{% assign gst_free = rows["14f63584-be71-40ca-9028-1a60e2e2cc90"] %}
-{% assign gst_free_exports = rows["10d8f9dc-db1e-4c87-9480-a696f59aeddf"] %}
-{% assign gst_on_imports = rows["9fe15ead-2138-4f4b-b3f5-398857d08503"] %}
-{% assign input_taxed = rows["f218a321-f83d-4d06-8d02-b52f595cc4fe"] %}
+      <Template>{% assign gst_10 = "8cf9d117-3142-4d9c-82ee-b57a0e22c809" %}
+{% assign gst_10_capex = "3e2cb830-e229-4525-8794-2e38761b3cfd" %}
+{% assign deferred_gst_10 = "73952f89-6139-4fd0-a937-165b8ed66ba8" %}
+{% assign gst_free = "14f63584-be71-40ca-9028-1a60e2e2cc90" %}
+{% assign gst_free_exports = "10d8f9dc-db1e-4c87-9480-a696f59aeddf" %}
+{% assign gst_on_imports = "9fe15ead-2138-4f4b-b3f5-398857d08503" %}
+{% assign input_taxed = "f218a321-f83d-4d06-8d02-b52f595cc4fe" %}
 
-{% assign g2 = gst_free_exports.totalSales %}
-{% assign g3 = gst_free.totalSales %}
-{% assign g4 = input_taxed.totalSales %}
-{% assign g8 = gst_10.totalSales %}
-{% assign g9 = gst_10.taxOnSales %}
-{% assign g10 = gst_10_capex.totalPurchases | minus: gst_10_capex.totalSales %}
-{% assign g11 = gst_10.totalPurchases | plus: gst_free.totalPurchases | plus: input_taxed.totalPurchases %}
-{% assign gst_10_on_imports_multipled_by_11 = gst_on_imports.taxOnPurchasesMinusTaxOnSales | times: 11 %}
+{% assign g2 = totalSales[gst_free_exports] %}
+{% assign g3 = totalSales[gst_free] %}
+{% assign g4 = totalSales[input_taxed] %}
+{% assign g8 = totalSales[gst_10] %}
+{% assign g9 = taxOnSales[gst_10] %}
+{% assign g10 = totalPurchases[gst_10_capex] | minus: totalSales[gst_10_capex] %}
+{% assign g11 = totalPurchases[gst_10] | plus: totalPurchases[gst_free] | plus: totalPurchases[input_taxed] %}
+{% assign gst_10_on_imports_multipled_by_11 = taxOnPurchasesMinusTaxOnSales[gst_on_imports] | times: 11 %}
 {% assign g11 = g11 | plus: gst_10_on_imports_multipled_by_11 %}
-{% assign g13 = input_taxed.totalPurchases %}
-{% assign g14 = gst_free.totalPurchases %}
-{% assign g20 = gst_10.taxOnPurchases | plus: gst_10_capex.taxOnPurchasesMinusTaxOnSales | plus: gst_on_imports.taxOnPurchasesMinusTaxOnSales %}
+{% assign g13 = totalPurchases[input_taxed] %}
+{% assign g14 = totalPurchases[gst_free] %}
+{% assign g20 = taxOnPurchases[gst_10] | plus: taxOnPurchasesMinusTaxOnSales[gst_10_capex] | plus: taxOnPurchasesMinusTaxOnSales[gst_on_imports] %}
 
-{% assign 7a = deferred_gst_10.totalPurchases | divided_by: 10 %}
-{% assign g11 = g11 | plus: deferred_gst_10.totalPurchases | plus: 7a %}
+{% assign 7a = totalPurchases[deferred_gst_10] | divided_by: 10 %}
+{% assign g11 = g11 | plus: totalPurchases[deferred_gst_10] | plus: 7a %}
 {% assign g20 = g20 | plus: 7a %}
 
 {% assign g5 = g2 | plus: g3 | plus: g4 %}
@@ -419,7 +419,7 @@ Union / association fees</DropdownValues>
     &lt;/tbody&gt;
 &lt;/table&gt;</Template>
       <Key>11acbfe1-0d24-4161-b366-fe905f2bcfd9</Key>
-      <Timestamp>636940085804126532</Timestamp>
+      <Timestamp>636940992370991253</Timestamp>
     </ReportTransformation>
     <ReportTransformation>
       <Name>PAYG payment summary – individual non-business</Name>
