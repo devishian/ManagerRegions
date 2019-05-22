@@ -433,7 +433,158 @@ Union / association fees</DropdownValues>
     &lt;/tbody&gt;
 &lt;/table&gt;</Template>
       <Key>11acbfe1-0d24-4161-b366-fe905f2bcfd9</Key>
-      <Timestamp>636940045558634367</Timestamp>
+      <Timestamp>636940085804126532</Timestamp>
+    </ReportTransformation>
+    <ReportTransformation>
+      <Name>PAYG payment summary – individual non-business</Name>
+      <Type>e7b3a4f4-35d7-4f92-a8fc-e9eadbc140a8</Type>
+      <Template>{% assign totalTaxWithheld = 0 %}
+{% assign grossPayments = 0 %}
+{% assign cdepPayments = 0 %}
+{% assign reportableEmployerSuperannuationContribution = 0 %}
+{% assign totalAllowances = 0 %}
+{% assign lumpSumPaymentA = 0 %}
+{% assign lumpSumPaymentB = 0 %}
+{% assign lumpSumPaymentD = 0 %}
+{% assign lumpSumPaymentE = 0 %}
+
+{% for o in objects %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Gross payments" %}{% assign grossPayments = grossPayments | plus: total[o.key] %}{% endif %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "CDEP payments" %}{% assign cdepPayments = cdepPayments | plus: total[o.key] %}{% endif %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Allowance" %}{% assign totalAllowances = totalAllowances | plus: total[o.key] %}{% endif %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Lump sum A" %}{% assign lumpSumPaymentA = lumpSumPaymentA | plus: total[o.key] %}{% endif %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Lump sum B" %}{% assign lumpSumPaymentB = lumpSumPaymentB | plus: total[o.key] %}{% endif %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Lump sum D" %}{% assign lumpSumPaymentD = lumpSumPaymentD | plus: total[o.key] %}{% endif %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Lump sum E" %}{% assign lumpSumPaymentE = lumpSumPaymentE | plus: total[o.key] %}{% endif %}
+    {% if o.customFields["e253ec72-1200-414a-941a-a93f4039a045"] == "PAYG" %}{% assign totalTaxWithheld = totalTaxWithheld | plus: total[o.key] %}{% endif %}
+    {% if o.customFields["8ce55e79-ec7a-4e5d-a41f-84c7b7b7189e"] == "Reportable employer super contribution" %}{% assign reportableEmployerSuperannuationContribution = reportableEmployerSuperannuationContribution | plus: total[o.key] %}{% endif %}
+{% endfor %}
+
+&lt;table style="padding: 30px"&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;th style="font-weight: bold; font-size: 24px; text-align: center; padding-bottom: 10px" colspan="12"&gt;PAYG payment summary – individual non-business&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="font-weight: bold; font-size: 18px; text-align: center; padding-bottom: 20px" colspan="12"&gt;
+                {% assign dayMonthFrom = form.from | date: 'dd/MM' %}
+                {% assign dayMonthTo = form.to | date: 'dd/MM' %}
+                {% if dayMonthFrom == "01/07" and dayMonthTo == "30/06" %}
+                    Payment summary for year ending 30 June {{ form.to | date: 'yyyy' }}
+                {% else %}
+                    Payment summary for the period from {{ form.from }} until {{ form.to }}
+                {% endif %}
+            &lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan="6"&gt;
+                &lt;b&gt;Payee details&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+                {{ form.employee.name }}&lt;br /&gt;
+                {{ form.employee.address | newline_to_br }}
+            &lt;/td&gt;
+            &lt;td colspan="6"&gt;
+                &lt;b&gt;NOTICE TO PAYEE&lt;/b&gt;&lt;br /&gt;
+                &lt;div style="font-size: 10px"&gt;
+                If this payment summary shows an amount in the total&lt;br /&gt;
+                tax withheld box you must lodge a tax return. If no tax&lt;br /&gt;
+                was withheld, you may still have to lodge a tax return.&lt;br /&gt;
+                &lt;br /&gt;
+                For more information on whether you have to lodge, or&lt;br /&gt;
+                about this payment and how it is taxed, you can:&lt;br /&gt;
+                - visit &lt;b&gt;www.ato.gov.au&lt;/b&gt;&lt;br /&gt;
+                - refer to Individual tax return Instructions&lt;br /&gt;
+                - phone &lt;b&gt;13 28 61&lt;/b&gt; between 8.00am and 6.00pm (EST),&lt;br /&gt;
+                  Monday to Friday
+                &lt;div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan="3"&gt;
+                &lt;span style="font-size: 10px"&gt;&amp;nbsp;&lt;/span&gt;&lt;br /&gt;
+                Period of payment
+            &lt;/td&gt;
+            &lt;td colspan="9"&gt;
+                &lt;table style="width: 1px"&gt;&lt;tr&gt;
+                    &lt;td&gt;
+                        &lt;span style="font-size: 10px"&gt;Day/Month/Year&lt;/span&gt;&lt;br /&gt;
+                        {{ form.from }}
+                    &lt;/td&gt;
+                    &lt;td style="text-align: center; padding-left: 30px; padding-right: 30px"&gt;
+                        &lt;span style="font-size: 10px"&gt;&amp;nbsp;&lt;/span&gt;&lt;br /&gt;
+                        to
+                    &lt;/td&gt;
+                    &lt;td&gt;
+                        &lt;span style="font-size: 10px"&gt;Day/Month/Year&lt;/span&gt;&lt;br /&gt;
+                        {{ form.to }}
+                    &lt;/td&gt;
+                &lt;/tr&gt;&lt;/table&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan="3"&gt;
+                Payee's tax file number
+            &lt;/td&gt;
+            &lt;td colspan="3"&gt;
+                {{ form.employee.customFields["8067ce2d-6a48-45f1-a5a9-5e2d923e9cc7"] }}
+            &lt;/td&gt;
+            &lt;td style="border-width: 1px; padding: 5px" colspan="6"&gt;
+                &lt;b&gt;TOTAL TAX WITHHELD $ {{ totalTaxWithheld }}&lt;/b&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td colspan="8"&gt;&lt;/td&gt;&lt;td colspan="3"&gt;Lump sum payments&lt;/td&gt;&lt;td colspan="1" style="text-align: center"&gt;Type&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan="3"&gt;Gross Payments&lt;/td&gt;
+            &lt;td colspan="1" style="text-align: right; font-weight: bold; padding-right: 5px"&gt;$&lt;/td&gt;
+            &lt;td colspan="3" style="border-width: 1px; padding: 5px"&gt;{{ grossPayments }}&lt;/td&gt;
+            &lt;td colspan="1" style="text-align: right; font-weight: bold; padding-right: 5px"&gt;A $&lt;/td&gt;
+            &lt;td colspan="3" style="border-width: 1px; padding: 5px"&gt;{{ lumpSumPaymentA }}&lt;/td&gt;
+            &lt;td colspan="1" style="border-width: 1px; padding: 5px"&gt;&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan="3"&gt;CDEP payments&lt;/td&gt;
+            &lt;td colspan="1" style="text-align: right; font-weight: bold; padding-right: 5px"&gt;$&lt;/td&gt;
+            &lt;td colspan="3" style="border-width: 1px; padding: 5px"&gt;{{ cdepPayments }}&lt;/td&gt;
+            &lt;td colspan="1" style="text-align: right; font-weight: bold; padding-right: 5px"&gt;B $&lt;/td&gt;
+            &lt;td colspan="3" style="border-width: 1px; padding: 5px"&gt;{{ lumpSumPaymentB }}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan="3"&gt;Reportable fringe benefits amount&lt;/td&gt;
+            &lt;td colspan="1" style="text-align: right; font-weight: bold; padding-right: 5px"&gt;$&lt;/td&gt;
+            &lt;td colspan="3" style="border-width: 1px; padding: 5px"&gt;0&lt;/td&gt;
+            &lt;td colspan="1" style="text-align: right; font-weight: bold; padding-right: 5px"&gt;D $&lt;/td&gt;
+            &lt;td colspan="3" style="border-width: 1px; padding: 5px"&gt;{{ lumpSumPaymentD }}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan="3"&gt;Reportable employer superannuation contributions&lt;/td&gt;
+            &lt;td colspan="1" style="text-align: right; font-weight: bold; padding-right: 5px"&gt;$&lt;/td&gt;
+            &lt;td colspan="3" style="border-width: 1px; padding: 5px"&gt;{{ reportableEmployerSuperannuationContribution }}&lt;/td&gt;
+            &lt;td colspan="1" style="text-align: right; font-weight: bold; padding-right: 5px"&gt;E $&lt;/td&gt;
+            &lt;td colspan="3" style="border-width: 1px; padding: 5px"&gt;{{ lumpSumPaymentE }}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan="3"&gt;Total allowances&lt;/td&gt;
+            &lt;td colspan="1" style="text-align: right; font-weight: bold; padding-right: 5px"&gt;$&lt;/td&gt;
+            &lt;td colspan="3" style="border-width: 1px; padding: 5px"&gt;{{ totalAllowances }}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan="12"&gt;&lt;b&gt;Allowances&lt;/b&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        {% for o in objects %}
+            {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Allowance" %}
+            &lt;tr&gt;
+                &lt;td colspan="3"&gt;{{ o.name }}&lt;/td&gt;
+                &lt;td colspan="3" style="text-align: right"&gt;$ {{ total[o.key] }}&lt;/td&gt;
+            &lt;/tr&gt;
+            {% endif %}
+        {% endfor %}
+    &lt;/tbody&gt;
+&lt;/table&gt;</Template>
+      <Key>92b38154-38fc-479a-a296-2019f656d1e2</Key>
+      <Timestamp>636940988553814179</Timestamp>
     </ReportTransformation>
   </RegionalReports>
   <TaxCodes>
