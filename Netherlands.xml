@@ -69,12 +69,12 @@
 			&lt;th style="font-weight: bold; font-size: 24px; text-align: center; padding-bottom: 10px" colspan="5"&gt;Concept BTW Aangifte&lt;/th&gt;
 		&lt;/tr&gt;
 		&lt;tr&gt;
-            &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="7"&gt;Voor de periode van {{ form.From }} t/m {{ form.To }}&lt;/th&gt;
+            &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="7"&gt;Voor de periode van {{ report.From }} t/m {{ report.To }}&lt;/th&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
             &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="7"&gt;
-                {% if form.accountingBasis == "AccrualBasis" %}Transactiebasis{% endif %}
-                {% if form.accountingBasis == "CashBasis" %}Kasbasis{% endif %}
+                {% if report.accountingBasis == "AccrualBasis" %}Transactiebasis{% endif %}
+                {% if report.accountingBasis == "CashBasis" %}Kasbasis{% endif %}
             &lt;/th&gt;
         &lt;/tr&gt;
 		&lt;tr&gt;
