@@ -39,12 +39,12 @@
 			&lt;th style="font-weight: bold; font-size: 24px; text-align: center; padding-bottom: 10px" colspan="4"&gt;VAT Calculation Worksheet&lt;/th&gt;
 		&lt;/tr&gt;
 		&lt;tr&gt;
-            &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="7"&gt;For the period from {{ form.From | date: 'dd MMMM yyyy' }} until {{ form.To | date: 'dd MMMM yyyy' }}&lt;/th&gt;
+            &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="7"&gt;For the period from {{ report.From | date: 'dd MMMM yyyy' }} until {{ report.To | date: 'dd MMMM yyyy' }}&lt;/th&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
             &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="7"&gt;
-                {% if form.accountingBasis == "AccrualBasis" %}Accrual basis{% endif %}
-                {% if form.accountingBasis == "CashBasis" %}Cash basis{% endif %}
+                {% if report.accountingBasis == "AccrualBasis" %}Accrual basis{% endif %}
+                {% if report.accountingBasis == "CashBasis" %}Cash basis{% endif %}
             &lt;/th&gt;
         &lt;/tr&gt;
 		&lt;tr&gt;
