@@ -703,12 +703,12 @@ No</DropdownValues>
                 &lt;td style="text-align: right; padding: 3px"&gt;
                     {% assign taxOnPurchases_gst_10 = supplierRows | where: 'TaxCode.Key', gst_10 | sum: 'taxOnPurchases' %}
                     {% assign taxOnPurchases_gst_10_capex = supplierRows | where: 'TaxCode.Key', gst_10_capex | sum: 'taxOnPurchases' %}
-                    &lt;div style="border: 1px solid #000; padding: 5px"&gt;{{ taxOnPurchases_gst_10 | plus: taxOnPurchases_gst_10_capex }}&lt;/div&gt;
+                    &lt;div style="border: 1px solid #000; padding: 5px"&gt;{{ taxOnPurchases_gst_10 | plus: taxOnPurchases_gst_10_capex | format: 'n' }}&lt;/div&gt;
                 &lt;/td&gt;
                 &lt;td style="text-align: right; padding: 3px"&gt;
                     {% assign taxOnPurchases_gst_10 = supplierRows | where: 'TaxCode.Key', gst_10 | sum: 'totalPurchases' %}
                     {% assign taxOnPurchases_gst_10_capex = supplierRows | where: 'TaxCode.Key', gst_10_capex | sum: 'totalPurchases' %}
-                    &lt;div style="border: 1px solid #000; padding: 5px"&gt;{{ taxOnPurchases_gst_10 | plus: taxOnPurchases_gst_10_capex }}&lt;/div&gt;
+                    &lt;div style="border: 1px solid #000; padding: 5px"&gt;{{ taxOnPurchases_gst_10 | plus: taxOnPurchases_gst_10_capex | format: 'n' }}&lt;/div&gt;
                 &lt;/td&gt;
             &lt;/tr&gt;
             {% endfor %}
