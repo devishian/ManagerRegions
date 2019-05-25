@@ -1,5 +1,5 @@
 <Settings>
-  <CustomFields/>
+  <CustomFields />
   <RegionalReports>
     <ReportTransformation>
       <Name>VAT Calculation Worksheet</Name>
@@ -12,6 +12,12 @@
 {% assign VAT_5_on_imports = "4ca35740-f9b7-4dc6-bc88-08bdc8715994" %}
 {% assign VAT_exempt = "42a5002c-5c8f-4def-8672-4e6f3fc09654" %}
 
+{% assign totalSales = objects | select: 'TaxCode.Key', 'totalSales' %}
+{% assign totalPurchases = objects | select: 'TaxCode.Key', 'totalPurchases' %}
+{% assign taxOnSales = objects | select: 'TaxCode.Key', 'taxOnSales' %}
+{% assign taxOnPurchases = objects | select: 'TaxCode.Key', 'taxOnPurchases' %}
+{% assign taxOnPurchasesMinusTaxOnSales = objects | select: 'TaxCode.Key', 'taxOnPurchasesMinusTaxOnSales' %}
+
 {% assign G1 = taxOnSales[VAT_5] | plus: taxOnSales[VAT_20] %}
 {% assign G2 = 0 %}
 {% assign G3 = G1 | plus: G2 %}
@@ -21,8 +27,8 @@
 {% assign G7_VAT_5_on_imports = taxOnPurchasesMinusTaxOnSales[VAT_5_on_imports] | times: 20 %}
 {% assign G7_VAT_20_on_imports = taxOnPurchasesMinusTaxOnSales[VAT_20_on_imports] | times: 5 %}
 {% assign G7 = netPurchases[VAT_0] | plus: netPurchases[VAT_0_EU] | plus: netPurchases[VAT_5] | plus: netPurchases[VAT_20] | plus: netPurchases[VAT_exempt] | plus: G7_VAT_5_on_imports | plus: G7_VAT_20_on_imports %}
-{% assign G8 = netSales[VAT_0_EU] %}
-{% assign G9 = netPurchases[VAT_0_EU] %}
+{% assign G8 = netSales[VAT_0_EU] | default: 0 %}
+{% assign G9 = netPurchases[VAT_0_EU] | default: 0 %}
 
 &lt;table style="padding: 30px"&gt;
 	&lt;tbody&gt;
@@ -148,126 +154,118 @@
 	&lt;/tbody&gt;
 &lt;/table&gt;</Template>
       <Key>12e5e9fb-d8e8-4fce-aa33-8ba564117550</Key>
-      <Timestamp>636940994295579848</Timestamp>
     </ReportTransformation>
   </RegionalReports>
   <TaxCodes>
     <TaxCode>
       <Name>VAT 20% on Imports</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>0</Rate>
       <TaxRate>TotalRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>11e650b0-ec87-4e45-9049-10a83ea4bed6</Key>
-      <Timestamp>636937309167055835</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>VAT Exempt</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>0</Rate>
       <TaxRate>ZeroRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>42a5002c-5c8f-4def-8672-4e6f3fc09654</Key>
-      <Timestamp>636937309167055835</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>VAT 5% on Imports</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>0</Rate>
       <TaxRate>TotalRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>4ca35740-f9b7-4dc6-bc88-08bdc8715994</Key>
-      <Timestamp>636937309167055835</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>VAT 5%</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>5</Rate>
       <TaxRate>CustomRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>56769971-405e-47bd-bd13-d64de0eae752</Key>
-      <Timestamp>636937309167055835</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>VAT 0%</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>0</Rate>
       <TaxRate>ZeroRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>6959fb01-3a48-486a-9bec-a0681a662f03</Key>
-      <Timestamp>636937309167055835</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>VAT 0% (EU)</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>0</Rate>
       <TaxRate>ZeroRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>70364d69-174a-4804-881e-852bdbff59e2</Key>
-      <Timestamp>636937309167055835</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>VAT 20%</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>20</Rate>
       <TaxRate>CustomRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>b926c2d8-09e4-496c-9a2c-818c8aaa36ed</Key>
-      <Timestamp>636937309167055835</Timestamp>
     </TaxCode>
   </TaxCodes>
-  <PayslipEarningsItems/>
-  <PayslipDeductionItems/>
-  <PayslipContributionItems/>
-  <BalanceSheetAccounts/>
-  <BalanceSheetGroups/>
+  <PayslipEarningsItems />
+  <PayslipDeductionItems />
+  <PayslipContributionItems />
+  <BalanceSheetAccounts />
+  <BalanceSheetGroups />
 </Settings>
