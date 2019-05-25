@@ -22,11 +22,17 @@
 {% assign BTW_9_verlegd = "dd28f171-7422-44a3-937a-432e8d2970ea" %}
 {% assign BTW_privegebruik = "9f2d06f9-0e16-4192-afa3-bff747910088" %}
 
-{% assign 1a_grondslag = netSales[BTW_21] %}
-{% assign 1a_omzetbelasting = taxOnSales[BTW_21] %}
+{% assign totalSales = objects | select: 'TaxCode.Key', 'totalSales' %}
+{% assign totalPurchases = objects | select: 'TaxCode.Key', 'totalPurchases' %}
+{% assign taxOnSales = objects | select: 'TaxCode.Key', 'taxOnSales' %}
+{% assign taxOnPurchases = objects | select: 'TaxCode.Key', 'taxOnPurchases' %}
+{% assign taxOnPurchasesMinusTaxOnSales = objects | select: 'TaxCode.Key', 'taxOnPurchasesMinusTaxOnSales' %}
+
+{% assign 1a_grondslag = netSales[BTW_21] | default: 0 %}
+{% assign 1a_omzetbelasting = taxOnSales[BTW_21] | default: 0 %}
 {% assign 1b_grondslag = netSales[BTW_6] | plus: netSales[BTW_9] %}
 {% assign 1b_omzetbelasting = taxOnSales[BTW_6] | plus: taxOnSales[BTW_9] %}
-{% assign 1d_omzetbelasting = taxOnPurchasesMinusTaxOnSales[BTW_privegebruik] %}
+{% assign 1d_omzetbelasting = taxOnPurchasesMinusTaxOnSales[BTW_privegebruik] | default: 0 %}
 {% assign 1e_grondslag = netSales[BTW_0_verlegd] | plus: netSales[BTW_0_vrijgesteld] | plus: netSales[BTW_21_verlegd] | plus: netSales[BTW_6_verlegd] | plus: netSales[BTW_9_verlegd] %}
 
 {% assign 2a_grondslag = netPurchases[BTW_0_verlegd] | plus: netPurchases[BTW_6_verlegd] | plus: netPurchases[BTW_9_verlegd] | plus: netPurchases[BTW_21_verlegd] %}
@@ -216,7 +222,6 @@
 	&lt;/tbody&gt;
 &lt;/table&gt;</Template>
       <Key>b755a3ef-32aa-4eab-8936-0e48b057f627</Key>
-      <Timestamp>636940997984898840</Timestamp>
     </ReportTransformation>
   </RegionalReports>
   <TaxCodes>
@@ -234,7 +239,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>1f681bc9-93fd-4e09-815f-2f1c6bc5044b</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 9%</Name>
@@ -250,7 +254,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>31dce658-cff1-4212-870b-5fd04cb83b1c</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 21%</Name>
@@ -266,7 +269,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>33855cc4-964b-44d1-be27-cf268b0ad77d</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 21% non-EU</Name>
@@ -282,7 +284,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>3a57686a-7ce6-43e7-aa2a-dc5e98ad931b</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 9% EU</Name>
@@ -298,7 +299,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>4d895b0c-a40c-44ff-b441-9620c7619699</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 0% non-EU</Name>
@@ -314,7 +314,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>75eaae26-98a4-4e1a-9d75-91bf2b7e7b11</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 9% non-EU</Name>
@@ -330,7 +329,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>815852ae-5a5d-4688-aa9b-0b06f3982ef2</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 21% EU</Name>
@@ -346,7 +344,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>93cdbadc-4a15-41ff-bf68-4ed927915680</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW privégebruik</Name>
@@ -362,7 +359,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>9f2d06f9-0e16-4192-afa3-bff747910088</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 0% verlegd</Name>
@@ -378,7 +374,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>ad18e082-df57-44f9-8fd0-ab3c5275d230</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 6%</Name>
@@ -394,7 +389,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>ad40e782-1f1c-486a-91a4-266e7001c8b3</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 6% non-EU</Name>
@@ -410,7 +404,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>bddb4876-fd25-49bf-ac71-5365878268ef</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 0% vrijgesteld</Name>
@@ -426,7 +419,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>c6b298fa-f994-47ac-b6c0-3299fbac8306</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 21% verlegd</Name>
@@ -442,7 +434,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>ce2c6c96-4364-42a8-8cf3-8315d1a4b246</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 0% EU</Name>
@@ -458,7 +449,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>d0eca2ec-e9da-40de-9be6-e2e9fb34269a</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 9% verlegd</Name>
@@ -474,7 +464,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>dd28f171-7422-44a3-937a-432e8d2970ea</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>BTW 6% verlegd</Name>
@@ -490,7 +479,6 @@
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>e5f20470-dffa-4453-a0a9-42a403c04e23</Key>
-      <Timestamp>636937309312890302</Timestamp>
     </TaxCode>
   </TaxCodes>
   <PayslipEarningsItems />
