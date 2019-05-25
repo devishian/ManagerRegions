@@ -4,7 +4,7 @@
       <Name>Australian Business Number (ABN)</Name>
       <Type>38cf4712-6e95-4ce1-b53a-bff03edad273</Type>
       <FieldType>SingleLineText</FieldType>
-      <FieldSize>Small</FieldSize>
+      <FieldSize>Medium</FieldSize>
       <Position />
       <DisplayOnList>False</DisplayOnList>
       <DisplayOnView>False</DisplayOnView>
@@ -12,13 +12,12 @@
       <Inactive>False</Inactive>
       <Obsolete_DefaultValue />
       <Key>0fba87ee-0386-401a-8d1f-302313b663f4</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </CustomField>
     <CustomField>
-      <Name>Tax file number</Name>
+      <Name>Tax File Number (TFN)</Name>
       <Type>dadb7f95-a5dd-45c0-945d-6ad4ee28776e</Type>
       <FieldType>SingleLineText</FieldType>
-      <FieldSize>Small</FieldSize>
+      <FieldSize>Medium</FieldSize>
       <Position />
       <DisplayOnList>False</DisplayOnList>
       <DisplayOnView>False</DisplayOnView>
@@ -26,7 +25,6 @@
       <Inactive>False</Inactive>
       <Obsolete_DefaultValue />
       <Key>8067ce2d-6a48-45f1-a5a9-5e2d923e9cc7</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </CustomField>
     <CustomField>
       <Name>ATO reporting category</Name>
@@ -47,7 +45,6 @@ Lump sum E</DropdownValues>
       <Inactive>False</Inactive>
       <Obsolete_DefaultValue />
       <Key>8198caf2-1125-4f8e-9469-527583e3ea5e</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </CustomField>
     <CustomField>
       <Name>ATO reporting category</Name>
@@ -61,7 +58,19 @@ Lump sum E</DropdownValues>
       <Inactive>False</Inactive>
       <Obsolete_DefaultValue />
       <Key>8ce55e79-ec7a-4e5d-a41f-84c7b7b7189e</Key>
-      <Timestamp>636941619589588836</Timestamp>
+    </CustomField>
+    <CustomField>
+      <Name>Australian Business Number (ABN)</Name>
+      <Type>6d2dc48d-2053-4e45-8330-285ebd431242</Type>
+      <FieldType>SingleLineText</FieldType>
+      <FieldSize>Medium</FieldSize>
+      <Position />
+      <DisplayOnList>False</DisplayOnList>
+      <DisplayOnView>False</DisplayOnView>
+      <DropdownValues />
+      <Inactive>False</Inactive>
+      <Obsolete_DefaultValue />
+      <Key>9483841a-8d21-4c77-8031-614f721878fa</Key>
     </CustomField>
     <CustomField>
       <Name>ATO reporting category</Name>
@@ -77,7 +86,20 @@ Union / association fees</DropdownValues>
       <Inactive>False</Inactive>
       <Obsolete_DefaultValue />
       <Key>e253ec72-1200-414a-941a-a93f4039a045</Key>
-      <Timestamp>636941619589588836</Timestamp>
+    </CustomField>
+    <CustomField>
+      <Name>Include this supplier in Taxable Payments Annual Report (TPAR)</Name>
+      <Type>6d2dc48d-2053-4e45-8330-285ebd431242</Type>
+      <FieldType>DropdownList</FieldType>
+      <FieldSize>Small</FieldSize>
+      <Position />
+      <DisplayOnList>False</DisplayOnList>
+      <DisplayOnView>False</DisplayOnView>
+      <DropdownValues>Yes
+No</DropdownValues>
+      <Inactive>False</Inactive>
+      <Obsolete_DefaultValue />
+      <Key>e3f5b9dd-ee9a-4fd0-9ca9-750c9aad9b1f</Key>
     </CustomField>
   </CustomFields>
   <RegionalReports>
@@ -92,17 +114,23 @@ Union / association fees</DropdownValues>
 {% assign gst_on_imports = "9fe15ead-2138-4f4b-b3f5-398857d08503" %}
 {% assign input_taxed = "f218a321-f83d-4d06-8d02-b52f595cc4fe" %}
 
-{% assign g2 = totalSales[gst_free_exports] %}
-{% assign g3 = totalSales[gst_free] %}
-{% assign g4 = totalSales[input_taxed] %}
-{% assign g8 = totalSales[gst_10] %}
-{% assign g9 = taxOnSales[gst_10] %}
+{% assign totalSales = objects | select: 'TaxCode.Key', 'totalSales' %}
+{% assign totalPurchases = objects | select: 'TaxCode.Key', 'totalPurchases' %}
+{% assign taxOnSales = objects | select: 'TaxCode.Key', 'taxOnSales' %}
+{% assign taxOnPurchases = objects | select: 'TaxCode.Key', 'taxOnPurchases' %}
+{% assign taxOnPurchasesMinusTaxOnSales = objects | select: 'TaxCode.Key', 'taxOnPurchasesMinusTaxOnSales' %}
+
+{% assign g2 = totalSales[gst_free_exports] | default: 0 %}
+{% assign g3 = totalSales[gst_free] | default: 0 %}
+{% assign g4 = totalSales[input_taxed] | default: 0 %}
+{% assign g8 = totalSales[gst_10] | default: 0 %}
+{% assign g9 = taxOnSales[gst_10] | default: 0 %}
 {% assign g10 = totalPurchases[gst_10_capex] | minus: totalSales[gst_10_capex] %}
 {% assign g11 = totalPurchases[gst_10] | plus: totalPurchases[gst_free] | plus: totalPurchases[input_taxed] %}
 {% assign gst_10_on_imports_multipled_by_11 = taxOnPurchasesMinusTaxOnSales[gst_on_imports] | times: 11 %}
 {% assign g11 = g11 | plus: gst_10_on_imports_multipled_by_11 %}
-{% assign g13 = totalPurchases[input_taxed] %}
-{% assign g14 = totalPurchases[gst_free] %}
+{% assign g13 = totalPurchases[input_taxed] | default: 0 %}
+{% assign g14 = totalPurchases[gst_free] | default: 0 %}
 {% assign g20 = taxOnPurchases[gst_10] | plus: taxOnPurchasesMinusTaxOnSales[gst_10_capex] | plus: taxOnPurchasesMinusTaxOnSales[gst_on_imports] %}
 
 {% assign 7a = totalPurchases[deferred_gst_10] | divided_by: 10 %}
@@ -136,12 +164,12 @@ Union / association fees</DropdownValues>
             &lt;th style="font-weight: bold; font-size: 24px; text-align: center; padding-bottom: 10px" colspan="7"&gt;GST Calculation Worksheet for BAS&lt;/th&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
-            &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="7"&gt;For the period from {{ form.From | date: 'dd MMMM yyyy' }} until {{ form.To | date: 'dd MMMM yyyy' }}&lt;/th&gt;
+            &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="7"&gt;For the period from {{ report.From | date: 'dd MMMM yyyy' }} until {{ report.To | date: 'dd MMMM yyyy' }}&lt;/th&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
             &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="7"&gt;
-                {% if form.accountingBasis == "AccrualBasis" %}Accrual basis{% endif %}
-                {% if form.accountingBasis == "CashBasis" %}Cash basis{% endif %}
+                {% if report.accountingBasis == "AccrualBasis" %}Accrual basis{% endif %}
+                {% if report.accountingBasis == "CashBasis" %}Cash basis{% endif %}
             &lt;/th&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -433,7 +461,6 @@ Union / association fees</DropdownValues>
     &lt;/tbody&gt;
 &lt;/table&gt;</Template>
       <Key>11acbfe1-0d24-4161-b366-fe905f2bcfd9</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </ReportTransformation>
     <ReportTransformation>
       <Name>PAYG payment summary – individual non-business</Name>
@@ -449,15 +476,15 @@ Union / association fees</DropdownValues>
 {% assign lumpSumPaymentE = 0 %}
 
 {% for o in objects %}
-    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Gross payments" %}{% assign grossPayments = grossPayments | plus: total[o.key] %}{% endif %}
-    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "CDEP payments" %}{% assign cdepPayments = cdepPayments | plus: total[o.key] %}{% endif %}
-    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Allowance" %}{% assign totalAllowances = totalAllowances | plus: total[o.key] %}{% endif %}
-    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Lump sum A" %}{% assign lumpSumPaymentA = lumpSumPaymentA | plus: total[o.key] %}{% endif %}
-    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Lump sum B" %}{% assign lumpSumPaymentB = lumpSumPaymentB | plus: total[o.key] %}{% endif %}
-    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Lump sum D" %}{% assign lumpSumPaymentD = lumpSumPaymentD | plus: total[o.key] %}{% endif %}
-    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Lump sum E" %}{% assign lumpSumPaymentE = lumpSumPaymentE | plus: total[o.key] %}{% endif %}
-    {% if o.customFields["e253ec72-1200-414a-941a-a93f4039a045"] == "PAYG" %}{% assign totalTaxWithheld = totalTaxWithheld | plus: total[o.key] %}{% endif %}
-    {% if o.customFields["8ce55e79-ec7a-4e5d-a41f-84c7b7b7189e"] == "Reportable employer super contribution" %}{% assign reportableEmployerSuperannuationContribution = reportableEmployerSuperannuationContribution | plus: total[o.key] %}{% endif %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Gross payments" %}{% assign grossPayments = grossPayments | plus: o.total %}{% endif %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "CDEP payments" %}{% assign cdepPayments = cdepPayments | plus: o.total %}{% endif %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Allowance" %}{% assign totalAllowances = totalAllowances | plus: o.total %}{% endif %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Lump sum A" %}{% assign lumpSumPaymentA = lumpSumPaymentA | plus: o.total %}{% endif %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Lump sum B" %}{% assign lumpSumPaymentB = lumpSumPaymentB | plus: o.total %}{% endif %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Lump sum D" %}{% assign lumpSumPaymentD = lumpSumPaymentD | plus: o.total %}{% endif %}
+    {% if o.customFields["8198caf2-1125-4f8e-9469-527583e3ea5e"] == "Lump sum E" %}{% assign lumpSumPaymentE = lumpSumPaymentE | plus: o.total %}{% endif %}
+    {% if o.customFields["e253ec72-1200-414a-941a-a93f4039a045"] == "PAYG" %}{% assign totalTaxWithheld = totalTaxWithheld | plus: o.total %}{% endif %}
+    {% if o.customFields["8ce55e79-ec7a-4e5d-a41f-84c7b7b7189e"] == "Reportable employer super contribution" %}{% assign reportableEmployerSuperannuationContribution = reportableEmployerSuperannuationContribution | plus: o.total %}{% endif %}
 {% endfor %}
 
 &lt;table style="padding: 30px"&gt;
@@ -468,20 +495,20 @@ Union / association fees</DropdownValues>
         &lt;/tr&gt;
         &lt;tr&gt;
             &lt;th style="font-weight: bold; font-size: 18px; text-align: center; padding-bottom: 20px" colspan="16"&gt;
-                {% assign dayMonthFrom = form.from | date: 'dd/MM' %}
-                {% assign dayMonthTo = form.to | date: 'dd/MM' %}
+                {% assign dayMonthFrom = report.from | date: 'dd/MM' %}
+                {% assign dayMonthTo = report.to | date: 'dd/MM' %}
                 {% if dayMonthFrom == "01/07" and dayMonthTo == "30/06" %}
-                    Payment summary for year ending 30 June {{ form.to | date: 'yyyy' }}
+                    Payment summary for year ending 30 June {{ report.to | date: 'yyyy' }}
                 {% else %}
-                    Payment summary for the period from {{ form.from }} until {{ form.to }}
+                    Payment summary for the period from {{ report.from }} until {{ report.to }}
                 {% endif %}
             &lt;/th&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
             &lt;td colspan="8"&gt;
                 &lt;b&gt;Payee details&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
-                {{ form.employee.name }}&lt;br /&gt;
-                {{ form.employee.address | newline_to_br }}
+                {{ report.employee.name }}&lt;br /&gt;
+                {{ report.employee.address | newline_to_br }}
             &lt;/td&gt;
             &lt;td colspan="8"&gt;
                 &lt;b&gt;NOTICE TO PAYEE&lt;/b&gt;&lt;br /&gt;
@@ -509,7 +536,7 @@ Union / association fees</DropdownValues>
                 &lt;table style="width: 1px"&gt;&lt;tr&gt;
                     &lt;td&gt;
                         &lt;span style="font-size: 10px"&gt;Day/Month/Year&lt;/span&gt;&lt;br /&gt;
-                        {{ form.from }}
+                        {{ report.from }}
                     &lt;/td&gt;
                     &lt;td style="text-align: center; padding-left: 30px; padding-right: 30px"&gt;
                         &lt;span style="font-size: 10px"&gt;&amp;nbsp;&lt;/span&gt;&lt;br /&gt;
@@ -517,7 +544,7 @@ Union / association fees</DropdownValues>
                     &lt;/td&gt;
                     &lt;td&gt;
                         &lt;span style="font-size: 10px"&gt;Day/Month/Year&lt;/span&gt;&lt;br /&gt;
-                        {{ form.to }}
+                        {{ report.to }}
                     &lt;/td&gt;
                 &lt;/tr&gt;&lt;/table&gt;
             &lt;/td&gt;
@@ -528,7 +555,7 @@ Union / association fees</DropdownValues>
                 Payee's tax file number
             &lt;/td&gt;
             &lt;td colspan="4"&gt;
-                {{ form.employee.customFields["8067ce2d-6a48-45f1-a5a9-5e2d923e9cc7"] }}
+                {{ report.employee.customFields["8067ce2d-6a48-45f1-a5a9-5e2d923e9cc7"] }}
             &lt;/td&gt;
             &lt;td style="border-width: 1px; padding: 5px" colspan="8"&gt;
                 &lt;table&gt;&lt;tr&gt;
@@ -599,7 +626,95 @@ Union / association fees</DropdownValues>
     &lt;/tbody&gt;
 &lt;/table&gt;</Template>
       <Key>92b38154-38fc-479a-a296-2019f656d1e2</Key>
-      <Timestamp>636941632806911937</Timestamp>
+    </ReportTransformation>
+    <ReportTransformation>
+      <Name>Taxable Payments Annual Report (TPAR)</Name>
+      <Type>1f957bf2-d198-4a9a-bb51-8d7d26b2fc5c</Type>
+      <Template>{% assign gst_10 = "8cf9d117-3142-4d9c-82ee-b57a0e22c809" %}
+{% assign gst_10_capex = "3e2cb830-e229-4525-8794-2e38761b3cfd" %}
+
+&lt;table style="padding: 30px"&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;th style="font-weight: bold; font-size: 24px; text-align: center; padding-bottom: 10px" colspan="5"&gt;Taxable Payments Annual Report&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="5"&gt;For the period from {{ report.From | date: 'dd MMMM yyyy' }} until {{ report.To | date: 'dd MMMM yyyy' }}&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="font-weight: bold; font-size: 16px; text-align: center; padding-bottom: 10px" colspan="5"&gt;
+                {% if report.accountingBasis == "AccrualBasis" %}Accrual basis{% endif %}
+                {% if report.accountingBasis == "CashBasis" %}Cash basis{% endif %}
+            &lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;&lt;th colspan="5"&gt;&amp;nbsp;&lt;/th&gt;&lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="background-color: #000; color: #fff; padding: 5px" colspan="5"&gt;Section A: &lt;b&gt;Payer details&lt;/b&gt; - this is the business that made the payment&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;&lt;th colspan="5"&gt;&amp;nbsp;&lt;/th&gt;&lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="font-weight: bold; padding: 3px"&gt;Payer name&lt;/th&gt;&lt;th style="font-weight: bold; padding: 3px"&gt;Payer ABN&lt;/th&gt;&lt;th style="font-weight: bold; padding: 3px" colspan="3"&gt;Payer address&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style="padding: 3px"&gt;{{ business.name }}&lt;/td&gt;
+            &lt;td style="padding: 3px"&gt;{{ business.customFields["0fba87ee-0386-401a-8d1f-302313b663f4"] }}&lt;/td&gt;
+            &lt;td style="padding: 3px"&gt;{{ business.address | newline_to_br }}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;&lt;th colspan="5"&gt;&amp;nbsp;&lt;/th&gt;&lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="background-color: #000; color: #fff; padding: 5px" colspan="5"&gt;Section B: &lt;b&gt;Declaration&lt;/b&gt; - this section must be completed by an individual authorised by the payer.&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;&lt;th colspan="5"&gt;&amp;nbsp;&lt;/th&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;th colspan="5"&gt;
+                &lt;b&gt;Before you sign this report&lt;/b&gt;&lt;br /&gt;
+                Check that you have provided accurate and complete information.&lt;br /&gt;
+                &lt;br /&gt;
+                &lt;b&gt;Penalties&lt;/b&gt;&lt;br /&gt;
+                Be aware that penalties may be imposed for giving false or misleading information.&lt;br /&gt;
+                &lt;br /&gt;
+                &lt;b&gt;Privacy&lt;/b&gt;&lt;br /&gt;
+                The law authorises us to collect information and disclose it to other government agencies. This includes personal&lt;br /&gt;
+                information of the person authorised to sign the declaration. For information about your privacy, go to &lt;b&gt;ato.gov.au/privacy&lt;/b&gt;&lt;br /&gt;
+        &lt;/th&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;th colspan="5"&gt;&amp;nbsp;&lt;/th&gt;&lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="background-color: #000; color: #fff; padding: 5px" colspan="5"&gt;Section C: &lt;b&gt;Payee details&lt;/b&gt; - there are the businesses or people you have paid&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;&lt;th colspan="5"&gt;&amp;nbsp;&lt;/th&gt;&lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th style="font-weight: bold; padding: 3px"&gt;Payee's name&lt;/th&gt;&lt;th style="font-weight: bold; padding: 3px"&gt;Payee's ABN&lt;/th&gt;&lt;th style="font-weight: bold; padding: 3px"&gt;Payee's address&lt;/th&gt;&lt;th style="text-align: right; font-weight: bold; padding: 3px"&gt;Total GST&lt;/th&gt;&lt;th style="text-align: right; font-weight: bold; padding: 3px"&gt;Gross amount paid&lt;/th&gt;
+        &lt;/tr&gt;
+
+        {% assign supplierKeys = objects | map: 'Supplier' | map: 'Key' | uniq %}
+        {% for supplierKey in supplierKeys %}
+            {% assign supplierRows = objects | where: 'Supplier.Key', supplierKey %}
+            {% assign supplier = supplierRows | map: 'Supplier' | first %}
+            {% if supplier.customFields["e3f5b9dd-ee9a-4fd0-9ca9-750c9aad9b1f"] != "Yes" %}{% continue %}{% endif %}
+            &lt;tr&gt;
+                &lt;td style="padding: 3px"&gt;
+                    {{ supplier.name }}
+                &lt;/td&gt;
+                &lt;td style="padding: 3px"&gt;
+                    {{ supplier.customFields["9483841a-8d21-4c77-8031-614f721878fa"] }}
+                &lt;/td&gt;
+                &lt;td style="padding: 3px"&gt;
+                    {{ supplier.address | newline_to_br }}
+                &lt;/td&gt;
+                &lt;td style="text-align: right; padding: 3px"&gt;
+                    {% assign taxOnPurchases_gst_10 = supplierRows | where: 'TaxCode.Key', gst_10 | sum: 'taxOnPurchases' %}
+                    {% assign taxOnPurchases_gst_10_capex = supplierRows | where: 'TaxCode.Key', gst_10_capex | sum: 'taxOnPurchases' %}
+                    &lt;div style="border: 1px solid #000; padding: 5px"&gt;{{ taxOnPurchases_gst_10 | plus: taxOnPurchases_gst_10_capex }}&lt;/div&gt;
+                &lt;/td&gt;
+                &lt;td style="text-align: right; padding: 3px"&gt;
+                    {% assign taxOnPurchases_gst_10 = supplierRows | where: 'TaxCode.Key', gst_10 | sum: 'totalPurchases' %}
+                    {% assign taxOnPurchases_gst_10_capex = supplierRows | where: 'TaxCode.Key', gst_10_capex | sum: 'totalPurchases' %}
+                    &lt;div style="border: 1px solid #000; padding: 5px"&gt;{{ taxOnPurchases_gst_10 | plus: taxOnPurchases_gst_10_capex }}&lt;/div&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            {% endfor %}
+    &lt;/tbody&gt;
+&lt;/table&gt;</Template>
+      <Key>c4a0ccf7-9171-4e8e-b390-97f7052b1479</Key>
     </ReportTransformation>
   </RegionalReports>
   <TaxCodes>
@@ -617,7 +732,6 @@ Union / association fees</DropdownValues>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>10d8f9dc-db1e-4c87-9480-a696f59aeddf</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>GST Free</Name>
@@ -633,7 +747,6 @@ Union / association fees</DropdownValues>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>14f63584-be71-40ca-9028-1a60e2e2cc90</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>GST 10% (CAPEX)</Name>
@@ -649,7 +762,6 @@ Union / association fees</DropdownValues>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>3e2cb830-e229-4525-8794-2e38761b3cfd</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>GST 10% (Deferred)</Name>
@@ -665,7 +777,6 @@ Union / association fees</DropdownValues>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>73952f89-6139-4fd0-a937-165b8ed66ba8</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>GST 10%</Name>
@@ -681,7 +792,6 @@ Union / association fees</DropdownValues>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>8cf9d117-3142-4d9c-82ee-b57a0e22c809</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>GST on Imports</Name>
@@ -697,7 +807,6 @@ Union / association fees</DropdownValues>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>9fe15ead-2138-4f4b-b3f5-398857d08503</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </TaxCode>
     <TaxCode>
       <Name>Input Taxed</Name>
@@ -713,7 +822,6 @@ Union / association fees</DropdownValues>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>f218a321-f83d-4d06-8d02-b52f595cc4fe</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </TaxCode>
   </TaxCodes>
   <PayslipEarningsItems>
@@ -728,7 +836,6 @@ Union / association fees</DropdownValues>
         </KeyValuePairOfGuidString>
       </CustomFields>
       <Key>0ae29fdb-1321-48f2-a07d-1e9cc343f80e</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </PayslipEarningsItem>
     <PayslipEarningsItem>
       <Name>Salary</Name>
@@ -741,7 +848,6 @@ Union / association fees</DropdownValues>
         </KeyValuePairOfGuidString>
       </CustomFields>
       <Key>353768ad-424f-4e08-afe2-f0f40aec1366</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </PayslipEarningsItem>
     <PayslipEarningsItem>
       <Name>Bonus</Name>
@@ -754,7 +860,6 @@ Union / association fees</DropdownValues>
         </KeyValuePairOfGuidString>
       </CustomFields>
       <Key>36286793-b7d7-4022-aee2-125e6557c582</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </PayslipEarningsItem>
     <PayslipEarningsItem>
       <Name>Overtime</Name>
@@ -767,7 +872,6 @@ Union / association fees</DropdownValues>
         </KeyValuePairOfGuidString>
       </CustomFields>
       <Key>4c63a2ad-4f45-4f17-b3c0-1ca1b1049643</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </PayslipEarningsItem>
     <PayslipEarningsItem>
       <Name>Commission</Name>
@@ -780,7 +884,6 @@ Union / association fees</DropdownValues>
         </KeyValuePairOfGuidString>
       </CustomFields>
       <Key>70423c5d-8062-41ae-8eea-a442652f0d08</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </PayslipEarningsItem>
     <PayslipEarningsItem>
       <Name>Back pay</Name>
@@ -793,7 +896,6 @@ Union / association fees</DropdownValues>
         </KeyValuePairOfGuidString>
       </CustomFields>
       <Key>7898a69d-4b8c-4d61-bd27-dd2ae462d0cd</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </PayslipEarningsItem>
     <PayslipEarningsItem>
       <Name>Unused long service leave</Name>
@@ -806,7 +908,6 @@ Union / association fees</DropdownValues>
         </KeyValuePairOfGuidString>
       </CustomFields>
       <Key>969e5175-b959-4019-8dce-1e475a70eca3</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </PayslipEarningsItem>
     <PayslipEarningsItem>
       <Name>Ordinary hours</Name>
@@ -819,7 +920,6 @@ Union / association fees</DropdownValues>
         </KeyValuePairOfGuidString>
       </CustomFields>
       <Key>f7bad7d8-ab90-403c-9620-76465687f4ce</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </PayslipEarningsItem>
   </PayslipEarningsItems>
   <PayslipDeductionItems>
@@ -834,7 +934,6 @@ Union / association fees</DropdownValues>
         </KeyValuePairOfGuidString>
       </CustomFields>
       <Key>caa9f4fb-4e4a-4366-8199-76df53161d24</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </PayslipDeductionItem>
   </PayslipDeductionItems>
   <PayslipContributionItems>
@@ -850,7 +949,6 @@ Union / association fees</DropdownValues>
         </KeyValuePairOfGuidString>
       </CustomFields>
       <Key>15e20b83-b811-48d9-a147-4ed5d3b5c7ff</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </PayslipContributionItem>
     <PayslipContributionItem>
       <Name>Superannuation guarantee</Name>
@@ -859,7 +957,6 @@ Union / association fees</DropdownValues>
       <LiabilityAccount />
       <CustomFields />
       <Key>671ce5ca-3382-436f-8908-914279f8ea25</Key>
-      <Timestamp>636941619589588836</Timestamp>
     </PayslipContributionItem>
   </PayslipContributionItems>
   <BalanceSheetAccounts />
