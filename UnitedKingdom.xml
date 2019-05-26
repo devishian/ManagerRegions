@@ -1,5 +1,5 @@
 <Settings>
-  <CustomFields/>
+  <CustomFields />
   <RegionalReports>
     <ReportTransformation>
       <Name>VAT Calculation Worksheet</Name>
@@ -165,7 +165,7 @@
 {{ G8 }}
 {{ G9 }}"&gt;
 		            &lt;div style="background-color: #000; color: #fff; padding: 5px"&gt;&lt;b&gt;Making Tax Digital (MTD)&lt;/b&gt;&lt;/div&gt;
-		            &lt;div style="padding: 20px; background-color: #ffffdb; border: 1px solid #000"&gt;
+		            &lt;div style="padding: 20px; margin-top: 10px; background-color: #ffffdb; border: 1px solid #000"&gt;
 		                &lt;input type="submit" value="Export to CSV" class="btn btn-warning" style="font-weight: bold; float: right" /&gt;
 		                &lt;div style="padding-bottom: 10px"&gt;&lt;b&gt;To lodge this VAT return electronically:&lt;/b&gt;&lt;/div&gt;
 		                &lt;ol style="padding-left: 20px"&gt;
@@ -188,14 +188,14 @@
   <TaxCodes>
     <TaxCode>
       <Name>VAT 20% on Imports</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>0</Rate>
       <TaxRate>TotalRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
@@ -203,14 +203,14 @@
     </TaxCode>
     <TaxCode>
       <Name>VAT Exempt</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>0</Rate>
       <TaxRate>ZeroRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
@@ -218,14 +218,14 @@
     </TaxCode>
     <TaxCode>
       <Name>VAT 5% on Imports</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>0</Rate>
       <TaxRate>TotalRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
@@ -233,14 +233,14 @@
     </TaxCode>
     <TaxCode>
       <Name>VAT 5%</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>5</Rate>
       <TaxRate>CustomRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
@@ -248,14 +248,14 @@
     </TaxCode>
     <TaxCode>
       <Name>VAT 0%</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>0</Rate>
       <TaxRate>ZeroRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
@@ -263,14 +263,14 @@
     </TaxCode>
     <TaxCode>
       <Name>VAT 0% (EU)</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>0</Rate>
       <TaxRate>ZeroRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
@@ -278,23 +278,23 @@
     </TaxCode>
     <TaxCode>
       <Name>VAT 20%</Name>
-      <Components/>
-      <Notes/>
+      <Components />
+      <Notes />
       <Rate>20</Rate>
       <TaxRate>CustomRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
-      <Account/>
+      <Account />
       <HasFlatRate>False</HasFlatRate>
-      <FlatRate/>
+      <FlatRate />
       <Archived>False</Archived>
       <IsReverseCharged>False</IsReverseCharged>
       <ReverseChargedRate>0</ReverseChargedRate>
       <Key>b926c2d8-09e4-496c-9a2c-818c8aaa36ed</Key>
     </TaxCode>
   </TaxCodes>
-  <PayslipEarningsItems/>
-  <PayslipDeductionItems/>
-  <PayslipContributionItems/>
-  <BalanceSheetAccounts/>
-  <BalanceSheetGroups/>
+  <PayslipEarningsItems />
+  <PayslipDeductionItems />
+  <PayslipContributionItems />
+  <BalanceSheetAccounts />
+  <BalanceSheetGroups />
 </Settings>
