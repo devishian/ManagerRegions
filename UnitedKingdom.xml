@@ -30,18 +30,6 @@
 {% assign G8 = netSales[VAT_0_EU] | default: 0 %}
 {% assign G9 = netPurchases[VAT_0_EU] | default: 0 %}
 
-&lt;textarea data-description="Export to CSV (TaxOptimizer.co.uk format)" data-extension="csv" style="display: none"&gt;
-{{ G1 }}
-{{ G2 }}
-{{ G3 }}
-{{ G4 }}
-{{ G5 }}
-{{ G6 }}
-{{ G7 }}
-{{ G8 }}
-{{ G9 }}
-&lt;/textarea&gt;
-
 &lt;table style="padding: 30px"&gt;
 	&lt;tbody&gt;
 		&lt;tr&gt;
@@ -162,6 +150,35 @@
 			&lt;td style="padding: 5px; width: 150px"&gt;
 				&lt;div style="font-weight: bold; text-align: center; background-color: #ccc; padding: 5px"&gt;#9 on the VAT Return&lt;/div&gt;
 			&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+		    &lt;td colspan="5"&gt;
+		        &lt;form method="POST" action="download"&gt;
+		            &lt;input type="hidden" name="filename" value="VAT Calculation Worksheet for the period from {{ report.From | date: 'dd MMMM yyyy' }} until {{ report.To | date: 'dd MMMM yyyy' }}.csv"&gt;
+		            &lt;input type="hidden" name="content" value="{{ G1 }}
+{{ G2 }}
+{{ G3 }}
+{{ G4 }}
+{{ G5 }}
+{{ G6 }}
+{{ G7 }}
+{{ G8 }}
+{{ G9 }}"&gt;
+		            &lt;div style="background-color: #000; color: #fff; padding: 5px"&gt;&lt;b&gt;Making Tax Digital (MTD)&lt;/b&gt;&lt;/div&gt;
+		            &lt;div style="padding: 20px; background-color: #ffffdb; border: 1px solid #000"&gt;
+		                &lt;input type="submit" value="Export to CSV" class="btn btn-warning" style="font-weight: bold; float: right" /&gt;
+		                &lt;div style="padding-bottom: 10px"&gt;&lt;b&gt;To lodge this VAT return electronically:&lt;/b&gt;&lt;/div&gt;
+		                &lt;ol style="padding-left: 20px"&gt;
+		                	&lt;li style="padding: 3px"&gt;Export this report to CSV file by clicking on &lt;b&gt;Export to CSV&lt;/b&gt; button&lt;/li&gt;
+		                    &lt;li style="padding: 3px"&gt;Go to &lt;a href="https://www.taxoptimiser.co.uk" target="_blank"&gt;https://www.taxoptimiser.co.uk&lt;/a&gt; and login&lt;/li&gt;
+		                    &lt;li style="padding: 3px"&gt;In the left navigation, click on &lt;b&gt;HMRC&lt;/b&gt;, then &lt;b&gt;VAT Returns&lt;/b&gt;&lt;/li&gt;
+		                    &lt;li style="padding: 3px"&gt;Click on the period you are making lodgement for&lt;/li&gt;
+		                    &lt;li style="padding: 3px"&gt;Drag and drop exported CSV file in the right panel&lt;/li&gt;
+		                    &lt;li style="padding: 3px"&gt;Verify the figures and click &lt;b&gt;Send VAT Return&lt;/b&gt; button.&lt;/li&gt;
+		                &lt;/ol&gt;
+		            &lt;/div&gt;
+                &lt;/form&gt;
+		    &lt;/td&gt;
 		&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;</Template>
