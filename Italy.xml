@@ -4,7 +4,7 @@
     <TaxCode>
       <Key>8a5ac333-9091-4c01-b5a2-1857fd884d92</Key>
       <Timestamp>0</Timestamp>
-      <Name>IVA 22%</Name>
+      <Name>IVA 22% DPR 633/72</Name>
       <Rate>22</Rate>
       <TaxRate>CustomRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
@@ -18,7 +18,7 @@
     <TaxCode>
       <Key>a7432e33-f01a-4a27-bd14-17f5598906e2</Key>
       <Timestamp>0</Timestamp>
-      <Name>IVA 10%</Name>
+      <Name>IVA 10% DPR 633/72</Name>
       <Rate>10</Rate>
       <TaxRate>CustomRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
@@ -32,7 +32,7 @@
     <TaxCode>
       <Key>53fbea2f-1116-4073-b820-d86941cee745</Key>
       <Timestamp>0</Timestamp>
-      <Name>IVA 4%</Name>
+      <Name>IVA 4% DPR 633/72</Name>
       <Rate>4</Rate>
       <TaxRate>CustomRate</TaxRate>
       <TaxRateType>SingleRate</TaxRateType>
